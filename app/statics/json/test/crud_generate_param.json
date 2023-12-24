@@ -1,0 +1,55 @@
+{
+  "crud_base_generate_param": {
+    "base_dir": "../../project/test_generate_project/app/crud/",
+    "base_file_name": "base.py",
+    "import_pkg_list": [
+      {
+        "from": "typing",
+        "import_list": [
+          "Any",
+          "Dict",
+          "Generic",
+          "List",
+          "Optional",
+          "Type",
+          "TypeVar",
+          "Union"
+        ]
+      },
+      {
+        "from": "fastapi.encoders",
+        "import_list": [
+          "jsonable_encoder"
+        ]
+      },
+      {
+        "from": "pydantic",
+        "import_list": [
+          "BaseModel"
+        ]
+      },
+      {
+        "from": "sqlalchemy",
+        "import_list": [
+          "func"
+        ]
+      },
+      {
+        "from": "sqlalchemy.orm",
+        "import_list": [
+          "Session"
+        ]
+      },
+      {
+        "from": "sqlalchemy.exc",
+        "import_list": [
+          "NoResultFound"
+        ]
+      }
+    ],
+    "class_wrap_list": [],
+    "base_class_name": "CRUDBase",
+    "base_parent_class_list": ["Generic[ModelType, CreateSchemaType, UpdateSchemaType]"],
+    "base_attr_list": []
+  }
+}

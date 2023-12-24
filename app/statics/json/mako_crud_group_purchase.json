@@ -1,0 +1,21 @@
+{
+  "author": "AdCoder",
+  "email": "17647309108@163.com",
+    "import_pkg_list": [
+    {
+      "from": "app.crud.base",
+      "import": "CRUDBase"
+    },
+    {
+      "from": "app.models.model_group_purchase",
+      "import": "GroupPurchase"
+    },
+    {
+      "from": "app.schemas.schema_group_purchase",
+      "import": "GroupPurchaseCreate, GroupPurchaseUpdate, GroupPurchasePage"
+    }
+  ],
+  "model_name": "GroupPurchase",
+  "base_crud_class": "CRUDBase",
+  "crud_obj": "group_purchase"
+}

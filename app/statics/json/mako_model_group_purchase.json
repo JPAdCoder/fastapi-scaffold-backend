@@ -1,0 +1,112 @@
+{
+  "author": "AdCoder",
+  "email": "17647309108@163.com",
+  "model_name": "GroupPurchase",
+  "base_model_name": "Base",
+  "table_name": "group_purchase",
+  "table_comment": "",
+  "import_pkg_list": [
+    {
+      "from": "sqlalchemy",
+      "import": "Boolean, Column, String, DateTime, Float"
+    },
+    {
+      "from": "app.db.base_class",
+      "import": "Base"
+    },
+    {
+      "from": "datetime",
+      "import": "datetime"
+    }
+  ],
+  "columns": [
+    {
+      "column_name": "id",
+      "column_attr": "String, primary_key=True, index=True"
+    },
+    {
+      "column_name": "land_id",
+      "column_attr": "String, comment=\"地块id\""
+    },
+    {
+      "column_name": "address",
+      "column_attr": "String, comment=\"土地位置\""
+    },
+    {
+      "column_name": "area_mu",
+      "column_attr": "Float, comment=\"土地面积(亩)\""
+    },
+    {
+      "column_name": "area_square_meter",
+      "column_attr": "Float, comment=\"土地面积(平方米)\""
+    },
+    {
+      "column_name": "sign_datetime",
+      "column_attr": "DateTime, comment=\"协议签订日期\""
+    },
+    {
+      "column_name": "province_reply_code",
+      "column_attr": "String, comment=\"自治区政府批文号\""
+    },
+    {
+      "column_name": "city_reply_code",
+      "column_attr": "String, comment=\"市政府批文号\""
+    },
+    {
+      "column_name": "expropriation_code",
+      "column_attr": "String, comment=\"征收批次号\""
+    },
+    {
+      "column_name": "expropriation_paid",
+      "column_attr": "Float, comment=\"已支付征地费用\""
+    },
+    {
+      "column_name": "expropriation_unpaid",
+      "column_attr": "Float, comment=\"未支付征地费用\""
+    },
+    {
+      "column_name": "compensate_standard",
+      "column_attr": "String, comment=\"补偿标准\""
+    },
+    {
+      "column_name": "cad_map",
+      "column_attr": "String, comment=\"测绘图MinIO对象名\""
+    },
+    {
+      "column_name": "protocol_file",
+      "column_attr": "String, comment=\"土地征收协议MinIO对象名\""
+    },
+    {
+      "column_name": "plan_file",
+      "column_attr": "String, comment=\"土地征收实施方案MinIO对象名\""
+    },
+    {
+      "column_name": "approval_file",
+      "column_attr": "String, comment=\"批准文件MinIO对象名\""
+    },
+    {
+      "column_name": "boundary_file",
+      "column_attr": "String, comment=\"勘测定界技术报告\""
+    },
+    {
+      "column_name": "yssfa_file",
+      "column_attr": "String, comment=\"一书三方案\""
+    },
+    {
+      "column_name": "plan_condition_file",
+      "column_attr": "String, comment=\"出让地块规划条件\""
+    },
+    {
+      "column_name": "is_active",
+      "column_attr": "Boolean, default=True, comment=\"是否启用\""
+    },
+    {
+      "column_name": "add_datetime",
+      "column_attr": "DateTime, default=datetime.now, comment=\"添加日期\""
+    },
+    {
+      "column_name": "update_datetime",
+      "column_attr": "DateTime, onupdate=datetime.now, comment=\"更新日期\""
+    }
+  ]
+}

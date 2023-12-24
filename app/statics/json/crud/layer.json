@@ -1,0 +1,1 @@
+{"author": "AdCoder", "email": "17647309108@163.com", "model_name": "Layer", "import_pkg_list": [{"from": "app.crud.base", "import": "CRUDBase"}, {"from": "app.models.layer", "import": "Layer"}, {"from": "app.schemas.layer", "import": "LayerCreate, LayerUpdate, LayerPage"}], "file_name": "layer", "base_crud_class": "CRUDBase", "crud_obj": "layer"}

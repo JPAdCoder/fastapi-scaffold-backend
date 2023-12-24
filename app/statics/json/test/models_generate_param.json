@@ -1,0 +1,135 @@
+{
+  "models_list": [
+    {
+      "model_dir": "../../project/test_generate_project/app/models/",
+      "model_file_name": "auth.py",
+      "import_pkg_list": [
+        {
+          "from": "sqlalchemy",
+          "import_list": [
+            "Boolean",
+            "Column",
+            "String",
+            "DateTime"
+          ]
+        },
+        {
+          "from": "app.db.base_class",
+          "import_list": [
+            "Base"
+          ]
+        },
+        {
+          "from": "datetime",
+          "import_list": [
+            "datetime"
+          ]
+        }
+      ],
+      "class_wrap_list": [],
+      "class_name": "Auth",
+      "parent_class_list": [
+        "Base"
+      ],
+      "class_attr_list": [
+        {
+          "attr_name": "id",
+          "attr_type": null,
+          "attr_value": null,
+          "attr_class": "Column",
+          "param_list": [
+            {
+              "param_value": "String"
+            },
+            {
+              "param_name": "primary_key",
+              "param_value": "True"
+            },
+            {
+              "param_name": "index",
+              "param_value": "True"
+            }
+          ]
+        },
+        {
+          "attr_name": "name",
+          "attr_type": null,
+          "attr_value": null,
+          "attr_class": "Column",
+          "param_list": [
+            {
+              "param_value": "String"
+            },
+            {
+              "param_name": "index",
+              "param_value": "True"
+            }
+          ]
+        },
+        {
+          "attr_name": "path",
+          "attr_type": null,
+          "attr_value": null,
+          "attr_class": "Column",
+          "param_list": [
+            {
+              "param_value": "String"
+            }
+          ]
+        },
+        {
+          "attr_name": "is_active",
+          "attr_type": null,
+          "attr_value": null,
+          "attr_class": "Column",
+          "param_list": [
+            {
+              "param_value": "Boolean()"
+            },
+            {
+              "param_name": "default",
+              "param_value": "True"
+            }
+          ]
+        },
+        {
+          "attr_name": "add_datetime",
+          "attr_type": null,
+          "attr_value": null,
+          "attr_class": "Column",
+          "param_list": [
+            {
+              "param_value": "DateTime"
+            },
+            {
+              "param_name": "default",
+              "param_value": "datetime.now()"
+            }
+          ]
+        },
+        {
+          "attr_name": "update_datetime",
+          "attr_type": null,
+          "attr_value": null,
+          "attr_class": "Column",
+          "param_list": [
+            {
+              "param_value": "DateTime"
+            },
+            {
+              "param_name": "onupdate",
+              "param_value": "datetime.now"
+            }
+          ]
+        },
+        {
+          "attr_name": "__tablename__",
+          "attr_type": null,
+          "attr_value": "'auth'",
+          "attr_class": null,
+          "param_list": []
+        }
+      ]
+    }
+  ]
+}

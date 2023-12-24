@@ -1,0 +1,1 @@
+{"author": "AdCoder", "email": "17647309108@163.com", "model_name": "Adcode", "import_pkg_list": [{"from": "app.crud.base", "import": "CRUDBase"}, {"from": "app.models.adcode", "import": "Adcode"}, {"from": "app.schemas.adcode", "import": "AdcodeCreate, AdcodeUpdate, AdcodePage"}], "file_name": "adcode", "base_crud_class": "CRUDBase", "crud_obj": "adcode"}

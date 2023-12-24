@@ -1,0 +1,50 @@
+{
+  "author": "AdCoder",
+  "email": "17647309108@163.com",
+  "import_pkg_list": [
+    {
+      "from": "typing",
+      "import": "Optional, List"
+    },
+    {
+      "from": "pydantic",
+      "import": "BaseModel, Field"
+    }
+  ],
+  "schema_classes": [
+    {
+      "name": "ComponentSubmitBase",
+      "parent_class": "BaseModel",
+      "is_pass": false,
+      "fields": [
+        {
+          "optional": true,
+          "field_name": "id",
+          "field_type": "str",
+          "attrs": [
+            {
+              "attr_value": "None"
+            },
+            {
+              "attr_name": "description",
+              "attr_value": "\"字符串类型 32位 小写无连字符uuid 唯一 有索引\""
+            },
+            {
+              "attr_name": "title",
+              "attr_value": "\"主键id\""
+            }
+          ]
+        }
+      ],
+      "meta_class": {
+        "name": "Config",
+        "fields": [
+          {
+            "name": "from_attributes",
+            "value": "True"
+          }
+        ]
+      }
+    }
+  ]
+}

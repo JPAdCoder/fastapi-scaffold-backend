@@ -1,0 +1,186 @@
+{
+  "author": "AdCoder",
+  "email": "17647309108@163.com",
+  "import_pkg_list": [
+    {
+      "from": "typing",
+      "import": "Optional, List"
+    },
+    {
+      "from": "pydantic",
+      "import": "BaseModel, Field"
+    }
+  ],
+  "schema_classes": [
+    {
+      "name": "LandBase",
+      "parent_class": "BaseModel",
+      "is_pass": false,
+      "fields": [
+        {
+          "optional": true,
+          "field_name": "gid",
+          "field_type": "int",
+          "attrs": [
+            {
+              "attr_value": "None"
+            },
+            {
+              "attr_name": "description",
+              "attr_value": "\"整形 自增 唯一 有索引\""
+            },
+            {
+              "attr_name": "title",
+              "attr_value": "\"主键id\""
+            }
+          ]
+        }
+      ],
+      "meta_class": null
+    },
+    {
+      "name": "LandCreate",
+      "parent_class": "BaseModel",
+      "is_pass": false,
+      "fields": [
+        {
+          "optional": false,
+          "field_name": "point_list",
+          "field_type": "List[dict]",
+          "attrs": [
+            {
+              "attr_value": "None"
+            },
+            {
+              "attr_name": "title",
+              "attr_value": "\"geometry点坐标列表\""
+            },
+            {
+              "attr_name": "description",
+              "attr_value": "\"根据坐标excel获取到的地块图层所对应的坐标点列表，元素为由x,y组成的字典\""
+            }
+          ]
+        },
+        {
+          "optional": true,
+          "field_name": "is_active",
+          "field_type": "bool",
+          "attrs": [
+            {
+              "attr_value": "True"
+            },
+            {
+              "attr_name": "title",
+              "attr_value": "\"是否启用\""
+            },
+            {
+              "attr_name": "description",
+              "attr_value": "\"布尔型 默认为true\""
+            }
+          ]
+        }
+      ],
+      "meta_class": null
+    },
+    {
+      "name": "LandUpdate",
+      "parent_class": "LandCreate",
+      "is_pass": true,
+      "meta_class": null
+    },
+    {
+      "name": "LandInDBBase",
+      "parent_class": "LandBase",
+      "is_pass": false,
+      "fields": [
+        {
+          "optional": false,
+          "field_name": "gid",
+          "field_type": "int",
+          "attrs": [
+            {
+              "attr_value": "None"
+            },
+            {
+              "attr_name": "title",
+              "attr_value": "\"地块id\""
+            },
+            {
+              "attr_name": "description",
+              "attr_value": "\"整形 自增 主键 唯一 有索引\""
+            }
+          ]
+        },
+        {
+          "optional": false,
+          "field_name": "geom",
+          "field_type": "str",
+          "attrs": [
+            {
+              "attr_value": "None"
+            },
+            {
+              "attr_name": "title",
+              "attr_value": "\"地块geometry\""
+            },
+            {
+              "attr_name": "description",
+              "attr_value": "\"geometry text 字符串\""
+            }
+          ]
+        }
+      ],
+      "meta_class": {
+        "name": "Config",
+        "fields": [
+          {
+            "name": "from_attributes",
+            "value": "True"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Land",
+      "parent_class": "LandInDBBase",
+      "is_pass": true,
+      "meta_class": null
+    },
+    {
+      "name": "LandInDB",
+      "parent_class": "LandInDBBase",
+      "is_pass": true,
+      "meta_class": null
+    },
+    {
+      "name": "LandPage",
+      "parent_class": "BaseModel",
+      "is_pass": false,
+      "fields": [
+        {
+          "optional": false,
+          "field_name": "data",
+          "field_type": "List[Land]",
+          "attrs": [
+            {
+              "attr_name": "title",
+              "attr_value": "\"当前分页的地块列表\""
+            }
+          ]
+        },
+        {
+          "optional": false,
+          "field_name": "total",
+          "field_type": "int",
+          "attrs": [
+            {
+              "attr_name": "title",
+              "attr_value": "\"符合分页查询条件的对象总数\""
+            }
+          ]
+        }
+      ],
+      "meta_class": null
+    }
+  ]
+}

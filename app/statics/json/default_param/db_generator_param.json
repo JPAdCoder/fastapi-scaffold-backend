@@ -1,0 +1,102 @@
+{
+  "db_session_generate_param": {
+    "db_session_dir": "../../project/test_generate_project/app/db/",
+    "db_session_file_name": "test_generate_db_session.py",
+    "import_pkg_list": [
+      {
+        "from": "sqlalchemy",
+        "import_list": [
+          "create_engine"
+        ]
+      },
+      {
+        "from": "sqlalchemy.orm",
+        "import_list": [
+          "sessionmaker"
+        ]
+      },
+      {
+        "from": "app.core.config",
+        "import_list": [
+          "settings"
+        ]
+      }
+    ],
+    "generate_engine_obj": {
+      "db_session_dir": "../../project/test_generate_project/",
+      "db_session_file_name": "test_generate_db.py",
+      "obj_name": "engine",
+      "obj_type": null,
+      "class_name": "create_engine",
+      "obj_param_list": [
+        {
+          "param_value": "settings.SQLALCHEMY_DATABASE_URL"
+        },
+        {
+          "param_name": "pool_pre_ping",
+          "param_value": "True"
+        }
+      ]
+    },
+    "generate_session_obj": {
+      "db_session_dir": "",
+      "db_session_file_name": "",
+      "obj_name": "SessionLocal",
+      "obj_type": null,
+      "class_name": "sessionmaker",
+      "obj_param_list": [
+        {
+          "param_name": "autocommit",
+          "param_value": "False"
+        },
+        {
+          "param_name": "autoflush",
+          "param_value": "False"
+        },
+        {
+          "param_name": "bind",
+          "param_value": "engine"
+        },
+        {
+          "param_name": "expire_on_commit",
+          "param_value": "False"
+        }
+      ]
+    }
+  },
+  "db_base_class_generate_param": {
+    "base_class_dir": "../../project/test_generate_project/app/db/",
+    "base_class_file_name": "test_generate_db_base_class.py",
+    "import_pkg_list": [
+      {
+        "from": "typing",
+        "import_list": [
+          "Any"
+        ]
+      },
+      {
+        "from": "sqlalchemy.ext.declarative",
+        "import_list": [
+          "as_declarative"
+        ]
+      }
+    ],
+    "class_wrap_list": ["@as_declarative()"],
+    "class_name": "Base",
+    "parent_class_list": [],
+    "class_attr_list": [
+      {
+        "attr_name": "id",
+        "attr_type": "Any",
+        "attr_value": null,
+        "param_list": []
+      },
+      {
+        "attr_name":"__name__",
+        "attr_type": "str",
+        "attr_value": null,
+        "param_list": []
+      }
+    ]
+  }
+}

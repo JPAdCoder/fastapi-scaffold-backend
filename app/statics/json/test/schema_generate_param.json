@@ -1,0 +1,258 @@
+{
+  "schema_list": [
+    {
+      "schema_dir": "../../project/test_generate_project/app/schemas/",
+      "schema_file_name": "auth.py",
+      "import_pkg_list": [
+        {
+          "from": "typing",
+          "import_list": [
+            "Optional",
+            "List"
+          ]
+        },
+        {
+          "from": "pydantic",
+          "import_list": [
+            "BaseModel",
+            "Field"
+          ]
+        }
+      ],
+      "schema_model_list": [
+        {
+          "class_wraps_list": [],
+          "class_name": "AuthBase",
+          "parent_class_list": [
+            "BaseModel"
+          ],
+          "is_param_newline": true,
+          "class_attr_list": [
+            {
+              "attr_name": "id",
+              "attr_type": "Optional[str]",
+              "attr_value": null,
+              "attr_class": "Field",
+              "param_list": [
+                {
+                  "param_value": "None"
+                },
+                {
+                  "param_name": "description",
+                  "param_value": "\"\""
+                },
+                {
+                  "param_name": "title",
+                  "param_value": "\"权限id\""
+                }
+              ]
+            },
+            {
+              "attr_name": "name",
+              "attr_type": "Optional[str]",
+              "attr_value": null,
+              "attr_class": "Field",
+              "param_list": [
+                {
+                  "param_value": "None"
+                },
+                {
+                  "param_name": "description",
+                  "param_value": "\"\""
+                },
+                {
+                  "param_name": "title",
+                  "param_value": "\"权限名称\""
+                }
+              ]
+            },
+            {
+              "attr_name": "path",
+              "attr_type": "Optional[str]",
+              "attr_value": null,
+              "attr_class": "Field",
+              "param_list": [
+                {
+                  "param_value": "None"
+                },
+                {
+                  "param_name": "description",
+                  "param_value": "\"\""
+                },
+                {
+                  "param_name": "title",
+                  "param_value": "\"权限路径\""
+                }
+              ]
+            },
+            {
+              "attr_name": "is_active",
+              "attr_type": "Optional[str]",
+              "attr_value": null,
+              "attr_class": "Field",
+              "param_list": [
+                {
+                  "param_value": "None"
+                },
+                {
+                  "param_name": "description",
+                  "param_value": "\"\""
+                },
+                {
+                  "param_name": "title",
+                  "param_value": "\"是否启用\""
+                }
+              ]
+            }
+          ],
+          "is_pass": false,
+          "sub_class": null
+        },
+        {
+          "class_wraps_list": [],
+          "class_name": "AuthCreate",
+          "parent_class_list": [
+            "BaseModel"
+          ],
+          "is_param_newline": true,
+          "class_attr_list": [
+            {
+              "attr_name": "name",
+              "attr_type": "str",
+              "attr_value": null,
+              "attr_class": "Field",
+              "param_list": [
+                {
+                  "param_name": "description",
+                  "param_value": "\"\""
+                },
+                {
+                  "param_name": "title",
+                  "param_value": "\"权限名称\""
+                }
+              ]
+            },
+            {
+              "attr_name": "path",
+              "attr_type": "str",
+              "attr_value": null,
+              "attr_class": "Field",
+              "param_list": [
+                {
+                  "param_name": "description",
+                  "param_value": "\"\""
+                },
+                {
+                  "param_name": "title",
+                  "param_value": "\"权限路径\""
+                }
+              ]
+            }
+          ],
+          "is_pass": false,
+          "sub_class": null
+        },
+        {
+          "class_wraps_list": [],
+          "class_name": "AuthUpdate",
+          "parent_class_list": [
+            "AuthBase"
+          ],
+          "is_param_newline": true,
+          "class_attr_list": [],
+          "is_pass": true,
+          "sub_class": null
+        },
+        {
+          "class_wraps_list": [],
+          "class_name": "AuthInDBBase",
+          "parent_class_list": [
+            "AuthBase"
+          ],
+          "is_param_newline": true,
+          "class_attr_list": [
+            {
+              "attr_name": "id",
+              "attr_type": "Optional[str]",
+              "attr_value": null,
+              "attr_class": "Field",
+              "param_list": [
+                {
+                  "param_value": "None"
+                },
+                {
+                  "param_name": "description",
+                  "param_value": "\"\""
+                },
+                {
+                  "param_name": "title",
+                  "param_value": "\"权限id\""
+                }
+              ]
+            }
+          ],
+          "is_pass": false,
+          "sub_class": {
+            "name": "Config",
+            "attr_list": [
+              {
+                "attr_name": "from_attributes",
+                "attr_type": null,
+                "attr_value": "True",
+                "attr_class": null,
+                "param_list": []
+              }
+            ]
+          }
+        },
+        {
+          "class_wraps_list": [],
+          "class_name": "Auth",
+          "parent_class_list": [
+            "AuthInDBBase"
+          ],
+          "is_param_newline": true,
+          "class_attr_list": [],
+          "is_pass": true,
+          "sub_class": null
+        },
+        {
+          "class_wraps_list": [],
+          "class_name": "AuthPage",
+          "parent_class_list": [
+            "BaseModel"
+          ],
+          "is_param_newline": true,
+          "class_attr_list": [
+            {
+              "attr_name": "data",
+              "attr_type": "List[Auth]",
+              "attr_value": null,
+              "attr_class": "Field",
+              "param_list": [
+                {
+                  "param_name": "title",
+                  "param_value": "\"当前分页的权限列表\""
+                }
+              ]
+            },
+            {
+              "attr_name": "total",
+              "attr_type": "int",
+              "attr_value": null,
+              "attr_class": "Field",
+              "param_list": [
+                {
+                  "param_name": "title",
+                  "param_value": "\"符合分页查询条件的对象总数\""
+                }
+              ]
+            }
+          ],
+          "is_pass": false,
+          "sub_class": null
+        }
+      ]
+    }
+  ]
+}

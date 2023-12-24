@@ -1,0 +1,21 @@
+{
+  "author": "AdCoder",
+  "email": "17647309108@163.com",
+  "model_name": "ExtendFile",
+  "base_crud_class": "CRUDBase",
+  "crud_obj": "extend_file",
+  "import_pkg_list": [
+    {
+      "from": "app.crud.base",
+      "import": "CRUDBase"
+    },
+    {
+      "from": "app.models.model_extend_file",
+      "import": "ExtendFile"
+    },
+    {
+      "from": "app.schemas.schema_extend_file",
+      "import": "ExtendFileCreate, ExtendFileUpdate, ExtendFilePage"
+    }
+  ]
+}

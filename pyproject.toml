@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "generate-fastapi-be"
+version = "0.1.0"
+description = ""
+authors = ["adcoder <17647309108@63.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "^0.105.0"
+setuptools = "^69.0.2"
+allure-pytest = "^2.13.2"
+loguru = "^0.7.2"
+sqlalchemy = "^2.0.23"
+uvicorn = {extras = ["standard"], version = "^0.25.0"}
+python-jose = "^3.3.0"
+passlib = "^1.7.4"
+mako = "^1.3.0"
+psycopg2 = "^2.9.9"
+python-multipart = "^0.0.6"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

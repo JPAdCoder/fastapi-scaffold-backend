@@ -1,0 +1,350 @@
+{
+  "author": "AdCoder",
+  "email": "17647309108@163.com",
+  "import_pkg_list": [
+    {
+      "from": "typing",
+      "import": "Optional, List"
+    },
+    {
+      "from": "pydantic",
+      "import": "BaseModel, Field"
+    }
+  ],
+  "schema_classes": [
+    {
+      "name": "ExtendFileBase",
+      "parent_class": "BaseModel",
+      "is_pass": false,
+      "fields": [
+        {
+          "optional": true,
+          "field_name": "id",
+          "field_type": "str",
+          "attrs": [
+            {
+              "attr_value": "None"
+            },
+            {
+              "attr_name": "description",
+              "attr_value": "\"字符串 32位无连字符uuid 自增 唯一 有索引\""
+            },
+            {
+              "attr_name": "title",
+              "attr_value": "\"主键id\""
+            }
+          ]
+        },
+        {
+          "optional": true,
+          "field_name": "file_title",
+          "field_type": "str",
+          "attrs": [
+            {
+              "attr_value": "None"
+            },
+            {
+              "attr_name": "description",
+              "attr_value": "\"文件分类\""
+            },
+            {
+              "attr_name": "title",
+              "attr_value": "\"文件分类\""
+            }
+          ]
+        },
+        {
+          "optional": true,
+          "field_name": "file_obj_name",
+          "field_type": "str",
+          "attrs": [
+            {
+              "attr_value": "None"
+            },
+            {
+              "attr_name": "description",
+              "attr_value": "\"文件MinIO对象名\""
+            },
+            {
+              "attr_name": "title",
+              "attr_value": "\"文件对象名\""
+            }
+          ]
+        },
+        {
+          "optional": true,
+          "field_name": "is_active",
+          "field_type": "bool",
+          "attrs": [
+            {
+              "attr_value": "None"
+            },
+            {
+              "attr_name": "description",
+              "attr_value": "\"是否启用\""
+            },
+            {
+              "attr_name": "title",
+              "attr_value": "\"是否启用\""
+            }
+          ]
+        },
+        {
+          "optional": true,
+          "field_name": "model_name",
+          "field_type": "str",
+          "attrs": [
+            {
+              "attr_value": "None"
+            },
+            {
+              "attr_name": "description",
+              "attr_value": "\"模块名称\""
+            },
+            {
+              "attr_name": "title",
+              "attr_value": "\"模块名称\""
+            }
+          ]
+        },
+        {
+          "optional": true,
+          "field_name": "union_id",
+          "field_type": "str",
+          "attrs": [
+            {
+              "attr_value": "None"
+            },
+            {
+              "attr_name": "description",
+              "attr_value": "\"关联id\""
+            },
+            {
+              "attr_name": "title",
+              "attr_value": "\"关联id\""
+            }
+          ]
+        }
+      ],
+      "meta_class": null
+    },
+    {
+      "name": "ExtendFileCreate",
+      "parent_class": "BaseModel",
+      "is_pass": false,
+      "fields": [
+        {
+          "optional": false,
+          "field_name": "id",
+          "field_type": "str",
+          "attrs": [
+            {
+              "attr_value": "None"
+            },
+            {
+              "attr_name": "description",
+              "attr_value": "\"字符串 32位无连字符uuid 自增 唯一 有索引\""
+            },
+            {
+              "attr_name": "title",
+              "attr_value": "\"主键id\""
+            }
+          ]
+        },
+        {
+          "optional": false,
+          "field_name": "file_title",
+          "field_type": "str",
+          "attrs": [
+            {
+              "attr_value": "None"
+            },
+            {
+              "attr_name": "description",
+              "attr_value": "\"文件分类\""
+            },
+            {
+              "attr_name": "title",
+              "attr_value": "\"文件分类\""
+            }
+          ]
+        },
+        {
+          "optional": false,
+          "field_name": "file_obj_name",
+          "field_type": "str",
+          "attrs": [
+            {
+              "attr_value": "None"
+            },
+            {
+              "attr_name": "description",
+              "attr_value": "\"文件MinIO对象名\""
+            },
+            {
+              "attr_name": "title",
+              "attr_value": "\"文件对象名\""
+            }
+          ]
+        },
+        {
+          "optional": false,
+          "field_name": "is_active",
+          "field_type": "bool",
+          "attrs": [
+            {
+              "attr_value": "None"
+            },
+            {
+              "attr_name": "description",
+              "attr_value": "\"是否启用\""
+            },
+            {
+              "attr_name": "title",
+              "attr_value": "\"是否启用\""
+            }
+          ]
+        },
+        {
+          "optional": true,
+          "field_name": "model_name",
+          "field_type": "str",
+          "attrs": [
+            {
+              "attr_value": "None"
+            },
+            {
+              "attr_name": "description",
+              "attr_value": "\"模块名称\""
+            },
+            {
+              "attr_name": "title",
+              "attr_value": "\"模块名称\""
+            }
+          ]
+        },
+        {
+          "optional": true,
+          "field_name": "union_id",
+          "field_type": "str",
+          "attrs": [
+            {
+              "attr_value": "None"
+            },
+            {
+              "attr_name": "description",
+              "attr_value": "\"关联id\""
+            },
+            {
+              "attr_name": "title",
+              "attr_value": "\"关联id\""
+            }
+          ]
+        }
+      ],
+      "meta_class": null
+    },
+    {
+      "name": "ExtendFileUpdate",
+      "parent_class": "ExtendFileBase",
+      "is_pass": true,
+      "meta_class": null,
+      "fields": [
+        {
+          "optional": false,
+          "field_name": "id",
+          "field_type": "str",
+          "attrs": [
+            {
+              "attr_value": "None"
+            },
+            {
+              "attr_name": "description",
+              "attr_value": "\"字符串 32位无连字符uuid 自增 唯一 有索引\""
+            },
+            {
+              "attr_name": "title",
+              "attr_value": "\"主键id\""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ExtendFileInDBBase",
+      "parent_class": "ExtendFileBase",
+      "is_pass": false,
+      "fields": [
+        {
+          "optional": false,
+          "field_name": "id",
+          "field_type": "str",
+          "attrs": [
+            {
+              "attr_value": "None"
+            },
+            {
+              "attr_name": "description",
+              "attr_value": "\"字符串 32位无连字符uuid 自增 唯一 有索引\""
+            },
+            {
+              "attr_name": "title",
+              "attr_value": "\"主键id\""
+            }
+          ]
+        }
+      ],
+      "meta_class": {
+        "name": "Config",
+        "fields": [
+          {
+            "name": "from_attributes",
+            "value": "True"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ExtendFile",
+      "parent_class": "ExtendFileInDBBase",
+      "is_pass": true,
+      "meta_class": null
+    },
+    {
+      "name": "ExtendFileInDB",
+      "parent_class": "ExtendFileInDBBase",
+      "is_pass": true,
+      "meta_class": null
+    },
+    {
+      "name": "ExtendFilePage",
+      "parent_class": "BaseModel",
+      "is_pass": false,
+      "fields": [
+        {
+          "optional": false,
+          "field_name": "data",
+          "field_type": "List[ExtendFile]",
+          "attrs": [
+            {
+              "attr_name": "title",
+              "attr_value": "\"当前分页的附加文件列表\""
+            }
+          ]
+        },
+        {
+          "optional": false,
+          "field_name": "total",
+          "field_type": "int",
+          "attrs": [
+            {
+              "attr_name": "title",
+              "attr_value": "\"符合分页查询条件的对象总数\""
+            }
+          ]
+        }
+      ],
+      "meta_class": null
+    }
+  ]
+}

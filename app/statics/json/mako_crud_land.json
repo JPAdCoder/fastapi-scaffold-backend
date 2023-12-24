@@ -1,0 +1,21 @@
+{
+  "author": "AdCoder",
+  "email": "17647309108@163.com",
+    "import_pkg_list": [
+    {
+      "from": "app.crud.base",
+      "import": "CRUDBase"
+    },
+    {
+      "from": "app.models.model_land",
+      "import": "Land"
+    },
+    {
+      "from": "app.schemas.schema_land",
+      "import": "LandCreate, LandUpdate, LandPage"
+    }
+  ],
+  "model_name": "Land",
+  "base_crud_class": "CRUDBase",
+  "crud_obj": "land"
+}

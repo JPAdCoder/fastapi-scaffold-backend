@@ -1,0 +1,1 @@
+{"author": "AdCoder", "email": "17647309108@163.com", "model_name": "Model", "import_pkg_list": [{"from": "app.crud.base", "import": "CRUDBase"}], "file_name": "model", "base_crud_class": "CRUDBase", "crud_obj": "Model"}

@@ -1,0 +1,57 @@
+{
+  "author": "AdCoder",
+  "email": "17647309108@163.com",
+  "model_name": "GroupPurchaseProtocol",
+  "import_pkg_list": [
+    {
+      "from": "sqlalchemy",
+      "import": "Column, String, DateTime, Boolean, Float"
+    },
+    {
+      "from": "datetime",
+      "import": "datetime"
+    },
+    {
+      "from": "app.db.base_class",
+      "import": "Base"
+    }
+  ],
+  "file_name": "group_purchase_protocol",
+  "base_model_name": "Base",
+  "table_name": "group_purchase_protocol",
+  "table_comment": "集体征收协议信息表",
+  "columns": [
+    {
+      "column_name": "id",
+      "column_attr": "String, primary_key=True, index=True, comment=\"主键、32位uuid、唯一、有索引\""
+    },
+    {
+      "column_name": "is_active",
+      "column_attr": "Boolean, default=True, comment=\"是否启用，默认为true\""
+    },
+    {
+      "column_name": "add_datetime",
+      "column_attr": "DateTime, default=datetime.now, comment=\"添加日期 默认为当前时间\""
+    },
+    {
+      "column_name": "update_datetime",
+      "column_attr": "DateTime, onupdate=datetime.now, comment=\"更新日期 更新时自动获取\""
+    },
+    {
+      "column_name": "sign_protocol_datetime",
+      "column_attr": "DateTime, comment=\"协议签订日期\""
+    },
+    {
+      "column_name": "area",
+      "column_attr": "Float, comment=\"协议总面积\""
+    },
+    {
+      "column_name": "construction_area",
+      "column_attr": "Float, comment=\"建设用地总面积\""
+    },
+    {
+      "column_name": "agricultural_area",
+      "column_attr": "Float, comment=\"农用地总面积\""
+    }
+  ]
+}

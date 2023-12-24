@@ -1,0 +1,59 @@
+{
+  "author": "AdCoder",
+  "email": "17647309108@163.com",
+  "model_name": "ComponentSubmit",
+  "base_model_name": "BaseModel",
+  "table_name": "component_submit",
+  "fields": [
+    {
+      "field_name": "id",
+      "field_attr": "String, primary_key=True, index=True"
+    },
+    {
+      "field_name": "year",
+      "field_attr": "String, comment=\"报批年份\""
+    },
+    {
+      "field_name": "batch_num",
+      "field_attr": "String, comment=\"批次号\""
+    },
+    {
+      "field_name": "file_oss_obj",
+      "field_attr": "String, comment=\"建设用地批复文件MinIO对象名\""
+    },
+    {
+      "field_name": "geom",
+      "field_attr": "Geometry(\"POLYGON\"), comment=\"报批地块矢量geom\""
+    },
+    {
+      "field_name": "is_active",
+      "field_attr": "Boolean, default=True, comment=\"是否启用\""
+    },
+    {
+      "field_name": "add_datetime",
+      "field_attr": "DateTime, default=datetime.now, comment=\"添加日期\""
+    },
+    {
+      "field_name": "update_datetime",
+      "field_attr": "DateTime, onupdate=datetime.now, comment=\"更新日期\""
+    }
+  ],
+  "import_pkg_list": [
+    {
+      "from": "sqlalchemy",
+      "import": "Boolean, Column, String, DateTime"
+    },
+    {
+      "from": "app.db.base_class",
+      "import": "Base"
+    },
+    {
+      "from": "geoalchemy2",
+      "import": "Geometry"
+    },
+    {
+      "from": "datetime",
+      "import": "datetime"
+    }
+  ]
+}
