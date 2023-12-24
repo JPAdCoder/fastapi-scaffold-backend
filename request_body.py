@@ -677,4 +677,4 @@ def get_sort_params(**kwargs):
 
 
 if __name__ == '__main__':
-    print(BaseQueryRequest.__fields__.keys())
+    print(BaseQueryRequest.model_fields.keys())
