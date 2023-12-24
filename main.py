@@ -30,5 +30,4 @@ if settings.BACKEND_CORS_ORIGINS:
 app.include_router(api_router, prefix=settings.API_V1_STR)
 
 if __name__ == '__main__':
-    print("hello drone")
     uvicorn.run(app='main:app', host=settings.SERVER_HOST, port=settings.SERVER_PORT, reload=True)
