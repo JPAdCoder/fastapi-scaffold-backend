@@ -10,3 +10,9 @@ steps:
       - pip install -i https://pypi.douban.com/simple poetry
       - poetry install --no-root
       - poetry run python3 main.py
+
+trigger:
+  branch:
+    - main
+  event:
+    - push
