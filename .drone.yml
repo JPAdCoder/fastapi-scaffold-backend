@@ -4,12 +4,12 @@ type: docker
 name: default
 
 steps:
-  - name: run
-    image: python:3.12-alpine
-    commands:
-      - pip install -i https://pypi.douban.com/simple poetry
-      - poetry install --no-root
-      - poetry run python3 main.py
+- name: run
+  image: python:3.12-alpine
+  commands:
+  - pip install -i https://pypi.douban.com/simple poetry
+  - poetry install --no-root
+  - poetry run python3 main.py
 
 trigger:
   branch:
