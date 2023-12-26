@@ -13,7 +13,7 @@ steps:
     commands:
       - export VERSION=$(cat version.txt)
       - export PROJECT_NAME=$(cat project-name.txt)
-      - sudo docker build -t $PROJECT_NAME:$VERSION -f Dockerfile .
+      - docker build -t $PROJECT_NAME:$VERSION -f Dockerfile .
 
   - name: run-tests
     image: $PROJECT_NAME:$VERSION
@@ -24,5 +24,5 @@ steps:
   - name: run-fastapi-app
     image: $PROJECT_NAME:$VERSION
     commands:
-      - sudo docker run -d -p 10087:80 --name $PROJECT_NAME $PROJECT_NAME:$VERSION
+      - docker run -d -p 10087:80 --name $PROJECT_NAME $PROJECT_NAME:$VERSION
 
