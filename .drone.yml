@@ -3,16 +3,30 @@ kind: pipeline
 type: docker
 name: default
 
-steps:
-- name: run
-  image: python:3.12-alpine
-  commands:
-  - pip install -i https://pypi.douban.com/simple poetry
-  - poetry install --no-root
-  - poetry run python3 main.py
+platform:
+  os: linux
+  arch: amd64
 
-trigger:
-  branch:
-  - main
-  event:
-  - push
+steps:
+  - name: set-env
+    image: alpine:latest
+    commands:
+      - VERSION=$(cat version.txt)
+      - PROJECT_NAME=$(cat project-name.txt)
+
+  - name: build-image
+    image: docker:19.03-dind
+    commands:
+      - docker build -t $VERSION:$PROJECT_NAME -f Dockerfile .
+
+  - name: run-tests
+    image: $PROJECT_NAME:$VERSION
+    commands:
+      - poetry install
+      - pytest
+
+  - name: run-fastapi-app
+    image: $PROJECT_NAME:$VERSION
+    commands:
+      - docker run -d -p 10087:80 --name $PROJECT_NAME $PROJECT_NAME:$VERSION
+
