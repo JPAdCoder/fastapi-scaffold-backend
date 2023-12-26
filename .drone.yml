@@ -17,8 +17,8 @@ steps:
   - name: build-image
     image: docker:19.03-dind
     commands:
-      - echo VERSION
-      - echo PROJECT_NAME
+      - echo $VERSION
+      - echo $PROJECT_NAME
       - docker build -t $VERSION:$PROJECT_NAME -f Dockerfile .
 
   - name: run-tests
