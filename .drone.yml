@@ -10,21 +10,21 @@ platform:
 steps:
   - name: build-image
     image: plugins/docker
-    commands:
-      - export VERSION=$(cat version.txt)
-      - export PROJECT_NAME=$(cat project-name.txt)
-    repo: $PROJECT_NAME
-    tags: $VERSION
+#    commands:
+#      - export VERSION=$(cat version.txt)
+#      - export PROJECT_NAME=$(cat project-name.txt)
+    repo: generate-fastapi-be
+    tags: 1.0.0
     dockerfile: Dockerfile
 
   - name: run-tests
-    image: $PROJECT_NAME:$VERSION
+    image: generate-fastapi-be:1.0.0
     commands:
       - poetry install
       - pytest
 
   - name: run-fastapi-app
-    image: $PROJECT_NAME:$VERSION
+    image: generate-fastapi-be:1.0.0
     commands:
-      - docker run -d -p 10087:80 --name $PROJECT_NAME $PROJECT_NAME:$VERSION
+      - docker run -d -p 10087:80 --name generate-fastapi-be generate-fastapi-be:1.0.0
 
