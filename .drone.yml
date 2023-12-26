@@ -8,9 +8,8 @@ platform:
   arch: amd64
 
 steps:
-
   - name: build-image
-    image: docker:19.03-dind
+    image: docker
     commands:
       - export VERSION=$(cat version.txt)
       - export PROJECT_NAME=$(cat project-name.txt)
