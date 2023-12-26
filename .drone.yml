@@ -21,7 +21,7 @@ steps:
     commands:
       - echo $VERSION
       - echo $PROJECT_NAME
-      - docker build -t $PROJECT_NAME:$VERSION -f Dockerfile .
+      - docker build -t `$PROJECT_NAME`:`$VERSION` -f Dockerfile .
 
   - name: run-tests
     image: $PROJECT_NAME:$VERSION
