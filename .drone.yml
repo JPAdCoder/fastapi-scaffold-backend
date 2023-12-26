@@ -13,13 +13,15 @@ steps:
     commands:
       - export VERSION=$(cat version.txt)
       - export PROJECT_NAME=$(cat project-name.txt)
+      - echo $VERSION
+      - echo $PROJECT_NAME
 
   - name: build-image
     image: docker:19.03-dind
     commands:
       - echo $VERSION
       - echo $PROJECT_NAME
-      - docker build -t $VERSION:$PROJECT_NAME -f Dockerfile .
+      - docker build -t $PROJECT_NAME:$VERSION -f Dockerfile .
 
   - name: run-tests
     image: $PROJECT_NAME:$VERSION
