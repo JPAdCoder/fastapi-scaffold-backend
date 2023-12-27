@@ -10,7 +10,6 @@ steps:
       - name: dockersock
         path: /var/run/docker.sock
     commands:
-      - ls -l
       - docker build -t generate-fastapi-be:1.0.0 .
 
 #  - name: test
@@ -20,6 +19,9 @@ steps:
 
   - name: run-container
     image: docker:dind
+    volumes:
+      - name: dockersock
+        path: /var/run/docker.sock
     commands:
       - docker run -d -p 10087:80 --name generate-fastapi generate-fastapi-be:1.0.0
 
