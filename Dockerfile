@@ -7,9 +7,6 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 # Set the working directory inside the container
 WORKDIR /code
 
-# Copy the poetry files (pyproject.toml and poetry.lock) into the container
-COPY pyproject.toml poetry.lock /code/
-
 # Install dependencies
 RUN pip install -r requirements.txt -i https://pypi.douban.com/simple
 
@@ -17,4 +14,4 @@ RUN pip install -r requirements.txt -i https://pypi.douban.com/simple
 COPY . /code/
 
 # Specify the default command to run on container start
-CMD ["poetry", "run", "python3", "main.py"]
+CMD ["python3", "main.py"]
