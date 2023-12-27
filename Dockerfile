@@ -10,11 +10,8 @@ WORKDIR /code
 # Copy the poetry files (pyproject.toml and poetry.lock) into the container
 COPY pyproject.toml poetry.lock /code/
 
-# Install poetry
-RUN pip install poetry
-
-# Install project dependencies using poetry
-RUN poetry install
+# Install dependencies
+RUN pip install -r requirements.txt -i https://pypi.douban.com/simple
 
 # Copy the rest of the application code into the container
 COPY . /code/
