@@ -8,7 +8,7 @@ class Settings:
     OPENAPI_DOC_URL = "/generate/api/v1/docs"
     OPENAPI_REDOC_URL = "/generate/api/v1/redoc"
     SERVER_HOST: str = "0.0.0.0"
-    SERVER_PORT: int = 10087
+    SERVER_PORT: int = 80
     SECRET_KEY: str = secrets.token_urlsafe(32)
     PROJECT_NAME: str = "FastAPI通用接口生成接口文档"
     # 60 minutes * 24 hours * 8 days = 8 days

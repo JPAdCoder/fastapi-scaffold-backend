@@ -4,6 +4,16 @@ type: docker
 name: default
 
 steps:
+  - name: remove old container
+    image: docker:dind
+    volumes:
+      - name: dockersock
+        path: /var/run/docker.sock
+    commands:
+      - docker stop generate-fastapi
+      - docker rm generate-fastapi
+      - docker rmi generate-fastapi-be:1.0.0
+
   - name: build-image
     image: docker:dind
     volumes:
