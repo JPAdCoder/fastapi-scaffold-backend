@@ -15,7 +15,6 @@ steps:
   - name: test
     image: generate-fastapi-be:1.0.0
     commands:
-      - pip install -r requirements.txt -i https://pypi.douban.com/simple
       - pytest
 
   - name: run

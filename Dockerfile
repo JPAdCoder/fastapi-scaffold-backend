@@ -7,6 +7,8 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 # Set the working directory inside the container
 WORKDIR /code
 
+RUN ls
+
 # Install dependencies
 RUN pip install -r requirements.txt -i https://pypi.douban.com/simple
 
