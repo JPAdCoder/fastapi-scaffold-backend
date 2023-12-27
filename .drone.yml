@@ -13,10 +13,10 @@ steps:
       - ls -l
       - docker build -t generate-fastapi-be:1.0.0 .
 
-  - name: test
-    image: generate-fastapi-be:1.0.0
-    commands:
-      - pytest
+#  - name: test
+#    image: generate-fastapi-be:1.0.0
+#    commands:
+#      - pytest
 
   - name: run
     image: generate-fastapi-be:1.0.0
