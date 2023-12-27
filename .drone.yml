@@ -3,28 +3,27 @@ kind: pipeline
 type: docker
 name: default
 
-platform:
-  os: linux
-  arch: amd64
-
 steps:
   - name: build-image
-    image: plugins/docker
-#    commands:
-#      - export VERSION=$(cat version.txt)
-#      - export PROJECT_NAME=$(cat project-name.txt)
-    repo: generate-fastapi-be
-    tags: 1.0.0
-    dockerfile: Dockerfile
+    image: docker:dind
+    volumes:
+      - name: dockersock
+        path: /var/run/docker.sock
+    commands:
+      - docker build -t generate-fastapi-be:1.0.0 .
 
-  - name: run-tests
+  - name: test
     image: generate-fastapi-be:1.0.0
     commands:
       - poetry install
       - pytest
 
-  - name: run-fastapi-app
+  - name: run
     image: generate-fastapi-be:1.0.0
     commands:
-      - docker run -d -p 10087:80 --name generate-fastapi-be generate-fastapi-be:1.0.0
+      - docker run -d -p 10087:80 --name generate-fastapi generate-fastapi-be:1.0.0
 
+volumes:
+  - name: dockersock
+    host:
+      path: /var/run/docker.sock
