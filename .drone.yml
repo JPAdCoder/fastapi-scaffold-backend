@@ -18,8 +18,8 @@ steps:
 #    commands:
 #      - pytest
 
-  - name: run
-    image: generate-fastapi-be:1.0.0
+  - name: run-container
+    image: docker:dind
     commands:
       - docker run -d -p 10087:80 --name generate-fastapi generate-fastapi-be:1.0.0
 
