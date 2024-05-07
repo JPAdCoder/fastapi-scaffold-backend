@@ -35,6 +35,7 @@ class UserBase(BaseModel):
 
 class UserCreate(UserBase):
     division_id: str = Field(
+        "",
         description="",
         title="部门id"
     )

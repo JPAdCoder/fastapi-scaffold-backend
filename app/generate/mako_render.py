@@ -50,44 +50,12 @@ def render_py(t_path: str, json_path: str, model_py_path: str):
 
 
 if __name__ == '__main__':
-    # # land
-    # # model
-    # render_py("model.mako",
-    #           "../statics/json/mako_model_land.json",
-    #           "../project/mako_project/app/models/model_land.py")
-    # # schema
-    # render_py("schema.mako",
-    #           "../statics/json/mako_schema_land.json",
-    #           "../project/mako_project/app/schemas/schema_land.py")
-    # # crud
-    # render_py("crud.mako",
-    #           "../statics/json/mako_crud_land.json",
-    #           "../project/mako_project/app/crud/crud_land.py")
-
-    # group_purchase
-    # model
-    # render_py("model.mako",
-    #           "../statics/json/mako_model_group_purchase.json",
-    #           "../project/mako_project/app/models/model_group_purchase.py")
+    pass
     # schema
-    render_py("../mako_scripts/schema.mako",
-              "../statics/json/mako_schema_group_purchase.json",
-              "../project/mako_project/app/schemas/schema_group_purchase.py")
+    # render_py("../mako_scripts/schema.mako",
+    #           "../statics/json/mako_schema_group_purchase.json",
+    #           "../project/mako_project/app/schemas/schema_group_purchase.py")
     # crud
     # render_py("crud.mako",
     #           "../statics/json/mako_crud_group_purchase.json",
     #           "../project/mako_project/app/crud/crud_group_purchase.py")
-
-    # extend_file
-    # model
-    # render_py("model.mako",
-    #           "../statics/json/mako_model_extend_file.json",
-    #           "../project/mako_project/app/models/model_extend_file.py")
-    # schema
-    # render_py("schema.mako",
-    #           "../statics/json/mako_schema_extend_file.json",
-    #           "../project/mako_project/app/schemas/schema_extend_file.py")
-    # crud
-    # render_py("crud.mako",
-    #           "../statics/json/mako_crud_extend_file.json",
-    #           "../project/mako_project/app/crud/crud_extend_file.py")

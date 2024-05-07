@@ -4,7 +4,7 @@ Time:   2022/2/16 2:31 PM
 Author: AdCoder
 Email:  17647309108@163.com
 """
-from typing import Any, List
+from typing import Any
 
 from fastapi import APIRouter, Depends, HTTPException, Security, Query
 from sqlalchemy.orm import Session
@@ -25,6 +25,8 @@ async def get_auths(
     """
     获取多个权限信息 \n
     :param db:  \n
+    :param skip: \n
+    :param limit: \n
     :param current_user:  \n
     :return:  \n
     """

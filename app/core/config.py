@@ -21,19 +21,17 @@ class Settings:
     POSTGRES_PORT: int = 54334
     POSTGRES_USER: str = "postgres"
     POSTGRES_PASSWORD: str = "96241158a0"
-    POSTGRES_DB: str = "generate"
+    POSTGRES_DB: str = "fastapi-generate"
     # postgresql://scott:tiger@localhost:5432/database
     SQLALCHEMY_DATABASE_URL: str = "postgresql://{}:{}@{}:{}/{}".format(
         POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_SERVER,
         POSTGRES_PORT, POSTGRES_DB
     )
-    MINIO_HOST: str = "39.153.153.249"
-    MINIO_PORT: int = 10087
-    MINIO_HOST_INTERNET: str = "39.153.153.249"
-    MINIO_PORT_INTERNET: int = 9000
-    MINIO_BUCKET: str = "land-manage"
+    MINIO_HOST: str = "192.168.31.29"
+    MINIO_PORT: int = 4000
+    MINIO_BUCKET: str = "fastapi-generate"
 
-    APP_PATH = "C:\\Users\\17647\\PycharmProjects\\generate-fast-apiweb\\app"
+    APP_PATH = "/Users/adcoder/PycharmProjects/generate-fastapi-be/app"
     STATICS_FILE_DIRECTORY: str = "{}\\statics".format(APP_PATH)
 
 

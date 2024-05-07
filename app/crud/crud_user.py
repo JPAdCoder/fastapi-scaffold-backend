@@ -26,6 +26,7 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate, UserPage]):
             id=uuid1().hex,
             name=obj_in.name,
             hashed_password=get_password_hash(obj_in.password),
+            role_id=obj_in.role_id,
             is_superuser=obj_in.is_superuser,
             division_id=obj_in.division_id
         )
@@ -80,10 +81,10 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate, UserPage]):
             -> int:
         return db.query(func.count(User.id)).filter(User.name.like('%{}%'.format(name_like))).scalar()
 
-    def get_users_by_filter_count(self, db: Session, user: UserBase = None):
+    def get_users_by_filter_count(self, db: Session, user_req: UserBase = None):
         condition_str = ''
         for param in self.query_params.keys():
-            if eval('user.%s == None' % param):
+            if eval('user_req.%s == None' % param):
                 continue
             condition_str += self.query_params[param] + ','
         # 截取掉最后一个条件的逗号

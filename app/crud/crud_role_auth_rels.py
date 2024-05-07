@@ -1,6 +1,6 @@
 from app.schemas.role_auth_rels import RoleAuthRelsCreate, RoleAuthRelsUpdate, RoleAuthRelsBase, RoleAuthRelsPage
 from app.models.role_auth_rels import RoleAuthRels
-from typing import Any, Dict, Union, Optional
+from typing import Any, Dict, Union
 from sqlalchemy.orm import Session
 from app.crud.base import CRUDBase
 from app.models.auth import Auth
@@ -39,20 +39,8 @@ class CRUDRoleAuthRels(CRUDBase[RoleAuthRels, RoleAuthRelsCreate, RoleAuthRelsUp
             update_data = obj_in.model_dump(exclude_unset=True)
         return super().update(db, db_obj=db_obj, obj_in=update_data)
 
-    @staticmethod
-    def get_by_name(db: Session, name: str) -> Optional[RoleAuthRels]:
-        return db.query(RoleAuthRels).filter(RoleAuthRels.name == name).first()
-
-    # @staticmethod 无name属性
-    # def get_role_auth_rels_search(db: Session, *, skip: int = 0, limit: int = 100, name_like: str = "") \
-    #         -> List[RoleAuthRels]:
-    #     if limit == -1:
-    #         return db.query(RoleAuthRels).filter(RoleAuthRels.name.like('%{}%'.format(name_like))).all()
-    #     return db.query(RoleAuthRels).filter(RoleAuthRels.name.like('%{}%'.format(name_like))).offset(skip).limit(
-    #         limit).all()
-
     def get_role_auth_rels_by_filter(self, db: Session, skip: int = 0,
-                                     limit: int = 100, role_auth_rels: RoleAuthRelsBase = None):
+                                     limit: int = 100, role_auth_rels_req: RoleAuthRelsBase = None):
         condition_str = ''
         for param in self.query_params.keys():
             if eval('role_auth_rels.%s == None' % param):
@@ -68,7 +56,7 @@ class CRUDRoleAuthRels(CRUDBase[RoleAuthRels, RoleAuthRelsCreate, RoleAuthRelsUp
                 "db.query(RoleAuthRels).filter({}).offset({}).limit({}).all()".format(condition_str, skip, limit))
         return RoleAuthRelsPage(
             data=data,
-            total=self.get_role_auth_rels_by_filter_count(db, role_auth_rels)
+            total=self.get_role_auth_rels_by_filter_count(db, role_auth_rels_req)
         )
 
     @staticmethod
@@ -79,21 +67,16 @@ class CRUDRoleAuthRels(CRUDBase[RoleAuthRels, RoleAuthRelsCreate, RoleAuthRelsUp
             .all()
         return [v.path for v in result]
 
-    @staticmethod
-    def get_role_auth_rels_search_count(db: Session, *, skip: int = 0, limit: int = 100, name_like: str = "") \
-            -> int:
-        return db.query(func.count(RoleAuthRels.id)).filter(RoleAuthRels.name.like('%{}%'.format(name_like))).scalar()
-
-    def get_role_auth_rels_by_filter_count(self, db: Session, role_auth_rels: RoleAuthRelsBase = None):
-        condition_str = ''
+    def get_role_auth_rels_by_filter_count(self, db: Session, role_auth_rels_req: RoleAuthRelsBase = None):
+        conditions = []
         for param in self.query_params.keys():
-            if eval('role_auth_rels.%s == None' % param):
+            if getattr(role_auth_rels_req, param) is None:
                 continue
-            condition_str += self.query_params[param] + ','
-        # 截取掉最后一个条件的逗号
-        if len(condition_str) > 1:
-            condition_str = condition_str[:-1]
-        return eval("db.query(func.count(RoleAuthRels.id)).filter({}).scalar()".format(condition_str))
+            conditions.append(self.query_params[param])
+        # 条件list判空
+        if not conditions:
+            return db.query(func.count(RoleAuthRels.id)).scalar()
+        return db.query(func.count(RoleAuthRels.id)).filter(*conditions).scalar()
 
 
 role_auth_rels = CRUDRoleAuthRels(RoleAuthRels, RoleAuthRelsPage)

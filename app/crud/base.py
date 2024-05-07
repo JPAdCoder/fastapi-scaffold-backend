@@ -24,7 +24,7 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType, PageSchema
         self.page_model = page_model
 
     def get(self, db: Session, model_id: Any) -> Optional[ModelType]:
-        return db.query(self.model).filter(self.model.id == model_id and self.model.is_active == True).first()
+        return db.query(self.model).filter(self.model.id == model_id and self.model.is_active is True).first()
 
     def get_multi(self, db: Session, *, skip: int = 0, limit: int = 10) \
             -> Any:

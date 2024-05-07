@@ -38,7 +38,7 @@ class CRUDAuth(CRUDBase[Auth, AuthCreate, AuthUpdate, AuthPage]):
         return super().update(db, db_obj=db_obj, obj_in=update_data)
 
     @staticmethod
-    def get_by_name(db: Session, name: str) -> Auth:
+    def get_by_name(db: Session, name: str) -> Auth | None:
         return db.query(Auth).filter(Auth.name == name).first()
 
     def get_auths_search(self, db: Session, *, skip: int = 0, limit: int = 100, name_like: str = "") \
@@ -68,7 +68,7 @@ class CRUDAuth(CRUDBase[Auth, AuthCreate, AuthUpdate, AuthPage]):
             data = eval("db.query(Auth).filter({}).offset({}).limit({}).all()".format(condition_str, skip, limit))
         return AuthPage(
             data=data,
-            total=self.get_auths_by_filter_count(db, auth)
+            total=self.get_auths_by_filter_count()
         )
 
     @staticmethod

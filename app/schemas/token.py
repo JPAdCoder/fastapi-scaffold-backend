@@ -17,7 +17,7 @@ class Token(BaseModel):
 
 
 class TokenPayload(BaseModel):
-    sub: Optional[int] = Field(
+    sub: Optional[str] = Field(
         None,
         description="",
         title=""

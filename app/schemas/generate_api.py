@@ -5,7 +5,7 @@ Author AdCoder
 Email 17647309108@163.com
 """
 from pydantic import Field
-from app.schemas.schema_base_param import BaseParam, ConfigDict
+from app.schemas.base_param import BaseParam, ConfigDict
 
 
 class FormParam(BaseParam):

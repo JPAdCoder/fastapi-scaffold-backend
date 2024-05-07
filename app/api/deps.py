@@ -46,7 +46,7 @@ def get_current_user(
     for scope in security_scopes.scopes:
         if scope not in token_data.scopes:
             raise HTTPException(status_code=403, detail="没有权限")
-    user = crud.user.get(db, id=str(token_data.sub))
+    user = crud.user.get(db, model_id=str(token_data.sub))
     if not user:
         raise HTTPException(status_code=404, detail="用户不存在")
     return user
