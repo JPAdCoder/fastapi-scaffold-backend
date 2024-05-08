@@ -4,12 +4,8 @@ type: docker
 name: python-3-4
 
 steps:
-- name: remove old container
-  image: docker:dind
-  volumes:
-  - name: dockersock
-    path: /var/run/docker.sock
+- name: test
+  image: python:3.4
   commands:
-  - docker stop generate-fastapi
-  - docker rm generate-fastapi
-  - docker rmi generate-fastapi-be:1.0.0
+  - pip install -r requirements.txt
+  - pytest
