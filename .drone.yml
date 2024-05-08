@@ -14,21 +14,21 @@ steps:
   - docker rm generate-fastapi
   - docker rmi generate-fastapi-be:1.0.0
 
-  - name: build-image
-    image: docker:dind
-    volumes:
-    - name: dockersock
-      path: /var/run/docker.sock
-    commands:
-    - docker build -t generate-fastapi-be:1.0.0 .
+- name: build-image
+  image: docker:dind
+  volumes:
+  - name: dockersock
+    path: /var/run/docker.sock
+  commands:
+  - docker build -t generate-fastapi-be:1.0.0 .
 
-  - name: run-container
-    image: docker:dind
-    volumes:
-    - name: dockersock
-      path: /var/run/docker.sock
-    commands:
-    - docker run -d -p 10087:80 --name generate-fastapi generate-fastapi-be:1.0.0
+- name: run-container
+  image: docker:dind
+  volumes:
+  - name: dockersock
+    path: /var/run/docker.sock
+  commands:
+  - docker run -d -p 10087:80 --name generate-fastapi generate-fastapi-be:1.0.0
 
 volumes:
 - name: dockersock
