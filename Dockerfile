@@ -14,7 +14,6 @@ RUN pip3 install poetry -i https://pypi.tuna.tsinghua.edu.cn/simple
 # Install dependencies
 RUN poetry install --no-root
 
-RUN poetry shell
 
 # Specify the default command to run on container start
-CMD ["python3", "main.py"]
+CMD ["poetry", "run", "python", "-m", "main"]
