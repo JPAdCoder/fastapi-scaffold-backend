@@ -11,12 +11,8 @@ WORKDIR /code
 # Install Poetry
 RUN pip install poetry -i https://pypi.tuna.tsinghua.edu.cn/simple
 
-RUN poetry --version
-
-RUN ls
-
 # Install dependencies
-RUN poetry install
+RUN poetry install --no-root
 
 # Specify the default command to run on container start
 CMD ["python3", "main.py"]
