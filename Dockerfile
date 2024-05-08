@@ -8,8 +8,11 @@ COPY . /code
 
 WORKDIR /code
 
+# Install Poetry
+RUN pip install poetry
+
 # Install dependencies
-RUN pip install -r requirements.txt -i https://pypi.douban.com/simple
+RUN poetry install
 
 # Specify the default command to run on container start
 CMD ["python3", "main.py"]
