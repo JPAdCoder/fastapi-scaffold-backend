@@ -11,6 +11,10 @@ WORKDIR /code
 # Install Poetry
 RUN pip install poetry -i https://pypi.tuna.tsinghua.edu.cn/simple
 
+RUN poetry --version
+
+RUN ls
+
 # Install dependencies
 RUN poetry install
 
