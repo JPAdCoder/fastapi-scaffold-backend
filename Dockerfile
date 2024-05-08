@@ -9,7 +9,7 @@ COPY . /code
 WORKDIR /code
 
 # Install Poetry
-RUN pip install poetry
+RUN pip install poetry -i https://pypi.douban.com/simple
 
 # Install dependencies
 RUN poetry install
