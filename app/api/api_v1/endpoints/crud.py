@@ -32,11 +32,11 @@ async def generate_crud(
     json_dir = os.path.dirname(json_path)
     os.makedirs(json_dir, exist_ok=True)
     # 判断生成的crud py文件路径是否存在，不存在则创建
-    crud_py_dir = os.path.dirname(
-        '{}/project/mako_project/app/crud/{}.py'.format(settings.APP_PATH,
-                                                        crud_param.file_name))
+    crud_py_path = '{}/project/mako_project/app/crud/{}.py'.format(settings.APP_PATH,
+                                                                   crud_param.file_name)
+    crud_py_dir = os.path.dirname(crud_py_path)
     with open(json_path, 'w', encoding='utf-8') as f:
         logger.debug(crud_param.model_dump(exclude_unset=False))
         f.write(json.dumps(jsonable_encoder(crud_param), ensure_ascii=False))
-    render_py('{}/mako_scripts/crud.mako'.format(settings.APP_PATH), json_path, crud_py_dir)
+    render_py('{}/mako_scripts/crud.mako'.format(settings.APP_PATH), json_path, crud_py_path)
     return crud_param

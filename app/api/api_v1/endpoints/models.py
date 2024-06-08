@@ -32,12 +32,12 @@ async def generate_model(
     json_dir = os.path.dirname(json_path)
     os.makedirs(json_dir, exist_ok=True)
     # 判断生成的model py文件路径是否存在，不存在则创建
-    model_py_dir = os.path.dirname(
-        '{}/project/{}/app/models/{}.py'.format(settings.APP_PATH, model_param.project_name,
-                                                model_param.file_name))
+    model_py_path = '{}/project/{}/app/models/{}.py'.format(settings.APP_PATH, model_param.project_name,
+                                                            model_param.file_name)
+    model_py_dir = os.path.dirname(model_py_path)
     os.makedirs(model_py_dir, exist_ok=True)
     with open(json_path, 'w', encoding='utf-8') as f:
         logger.debug(model_param.model_dump(exclude_unset=False))
         f.write(json.dumps(jsonable_encoder(model_param), ensure_ascii=False))
-    render_py('{}/mako_scripts/model.mako'.format(settings.APP_PATH), json_path, model_py_dir)
+    render_py('{}/mako_scripts/model.mako'.format(settings.APP_PATH), json_path, model_py_path)
     return model_param

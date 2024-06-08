@@ -1,6 +1,6 @@
 from app.schemas.role_auth_rels import RoleAuthRelsCreate, RoleAuthRelsUpdate, RoleAuthRelsBase, RoleAuthRelsPage
 from app.models.role_auth_rels import RoleAuthRels
-from typing import Any, Dict, Union
+from typing import Any, Dict
 from sqlalchemy.orm import Session
 from app.crud.base import CRUDBase
 from app.models.auth import Auth
@@ -32,7 +32,7 @@ class CRUDRoleAuthRels(CRUDBase[RoleAuthRels, RoleAuthRelsCreate, RoleAuthRelsUp
         return db_obj
 
     def update(self, db: Session, *, db_obj: RoleAuthRels,
-               obj_in: Union[RoleAuthRelsUpdate, Dict[str, Any]]) -> RoleAuthRels:
+               obj_in: RoleAuthRelsUpdate | Dict[str, Any]) -> RoleAuthRels:
         if isinstance(obj_in, dict):
             update_data = obj_in
         else:

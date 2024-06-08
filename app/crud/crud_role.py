@@ -1,5 +1,5 @@
 from app.schemas.role import RoleCreate, RoleUpdate, RoleBase, RolePage
-from typing import Any, Dict, Union, Optional
+from typing import Any, Dict, Optional
 from sqlalchemy.orm import Session
 from app.crud.base import CRUDBase
 from app.models.role import Role
@@ -28,7 +28,7 @@ class CRUDRole(CRUDBase[Role, RoleCreate, RoleUpdate, RolePage]):
         db.commit()
         return db_obj
 
-    def update(self, db: Session, *, db_obj: Role, obj_in: Union[RoleUpdate, Dict[str, Any]]) -> Role:
+    def update(self, db: Session, *, db_obj: Role, obj_in: RoleUpdate | Dict[str, Any]) -> Role:
         if isinstance(obj_in, dict):
             update_data = obj_in
         else:

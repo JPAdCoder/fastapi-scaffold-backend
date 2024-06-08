@@ -1,4 +1,4 @@
-from typing import Any, Dict, Generic, List, Optional, Type, TypeVar, Union
+from typing import Any, Dict, Generic, List, Optional, Type, TypeVar
 from fastapi.encoders import jsonable_encoder
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
@@ -66,7 +66,7 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType, PageSchema
         return db_obj
 
     @staticmethod
-    def update(db: Session, *, db_obj: ModelType, obj_in: Union[UpdateSchemaType, Dict[str, Any]]) \
+    def update(db: Session, *, db_obj: ModelType, obj_in: UpdateSchemaType | Dict[str, Any]) \
             -> ModelType:
         if isinstance(obj_in, dict):
             update_data = obj_in

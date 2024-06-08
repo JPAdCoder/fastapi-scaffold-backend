@@ -12,7 +12,7 @@ import json
 
 
 @logger.catch
-def get_generate_json_params(json_path: str = "../statics/json/mako_model.json"):
+def get_generate_json_params(json_path: str):
     """
     根据路径将json文件转为dict
     """

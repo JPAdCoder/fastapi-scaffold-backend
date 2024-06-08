@@ -1,6 +1,6 @@
 from app.schemas.user import UserCreate, UserUpdate, UserBase, UserPage
 from app.utils.security import get_password_hash, verify_password
-from typing import Any, Dict, Union, Optional
+from typing import Any, Dict, Optional
 from sqlalchemy.orm import Session
 from app.crud.base import CRUDBase
 from app.models.user import User
@@ -34,7 +34,7 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate, UserPage]):
         db.commit()
         return db_obj
 
-    def update(self, db: Session, *, db_obj: User, obj_in: Union[UserUpdate, Dict[str, Any]]) -> User:
+    def update(self, db: Session, *, db_obj: User, obj_in: UserUpdate | Dict[str, Any]) -> User:
         if isinstance(obj_in, dict):
             update_data = obj_in
         else:

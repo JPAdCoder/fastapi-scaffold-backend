@@ -1,5 +1,5 @@
 from app.schemas.auth import AuthCreate, AuthUpdate, AuthBase, AuthPage
-from typing import Any, Dict, Union
+from typing import Any, Dict
 from sqlalchemy.orm import Session
 from app.crud.base import CRUDBase
 from app.models.auth import Auth
@@ -30,7 +30,7 @@ class CRUDAuth(CRUDBase[Auth, AuthCreate, AuthUpdate, AuthPage]):
         db.commit()
         return db_obj
 
-    def update(self, db: Session, *, db_obj: Auth, obj_in: Union[AuthUpdate, Dict[str, Any]]) -> Auth:
+    def update(self, db: Session, *, db_obj: Auth, obj_in: AuthUpdate | Dict[str, Any]) -> Auth:
         if isinstance(obj_in, dict):
             update_data = obj_in
         else:

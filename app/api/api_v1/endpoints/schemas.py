@@ -32,11 +32,11 @@ async def generate_schema(
     json_dir = os.path.dirname(json_path)
     os.makedirs(json_dir, exist_ok=True)
     # 判断生成的schema py文件路径是否存在，不存在则创建
-    schema_py_dir = os.path.dirname(
-        '{}/project/{}/app/schemas/{}.py'.format(settings.APP_PATH, schema_param.project_name,
-                                                 schema_param.file_name))
+    schema_py_path = '{}/project/{}/app/schemas/{}.py'.format(settings.APP_PATH, schema_param.project_name,
+                                                              schema_param.file_name)
+    schema_py_dir = os.path.dirname(schema_py_path)
     with open(json_path, 'w', encoding='utf-8') as f:
         logger.debug(schema_param.model_dump(exclude_unset=False))
         f.write(json.dumps(jsonable_encoder(schema_param), ensure_ascii=False))
-    render_py('{}/mako_scripts/schema.mako'.format(settings.APP_PATH), json_path, schema_py_dir)
+    render_py('{}/mako_scripts/schema.mako'.format(settings.APP_PATH), json_path, schema_py_path)
     return schema_param
