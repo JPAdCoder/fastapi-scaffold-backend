@@ -31,7 +31,7 @@ class Settings:
     MINIO_PORT: int = 4000
     MINIO_BUCKET: str = "fastapi-generate"
 
-    APP_PATH = "/Users/adcoder/PycharmProjects/generate-fastapi-be/app"
+    APP_PATH = "/code/app"
     STATICS_FILE_DIRECTORY: str = "{}\\statics".format(APP_PATH)
 
 
