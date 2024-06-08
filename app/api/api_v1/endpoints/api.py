@@ -5,6 +5,7 @@ Author: AdCoder
 Email:  17647309108@163.com
 """
 import json
+import os.path
 from typing import Any
 
 from fastapi import APIRouter, Depends
@@ -23,13 +24,18 @@ router = APIRouter()
 
 @router.post("/api/generate", summary="生成api文件")
 async def generate_crud(
-        model_param: schemas.generate_api.FormParam,
+        api_param: schemas.generate_api.FormParam,
         db: Session = Depends(deps.get_db)
 ) -> Any:
-    json_path = '{}/json/api/{}.json'.format(settings.STATICS_FILE_DIRECTORY, model_param.file_name)
+    json_path = '{}/json/api/{}.json'.format(settings.STATICS_FILE_DIRECTORY, api_param.file_name)
+    # 判断对应的json路径是否存在，不存在则创建
+    json_dir = os.path.dirname(json_path)
+    os.makedirs(json_dir, exist_ok=True)
+    # 判断生成的api py文件路径是否存在，不存在则创建
+    api_py_dir = os.path.dirname(
+        '{}/project/mako_project/app/api/{}.py'.format(settings.APP_PATH, api_param.file_name))
     with open(json_path, 'w', encoding='utf-8') as f:
-        logger.debug(model_param.model_dump(exclude_unset=False))
-        f.write(json.dumps(jsonable_encoder(model_param), ensure_ascii=False))
-    file_path = render_py('{}/mako_scripts/api.mako'.format(settings.APP_PATH), json_path,
-                          '{}/project/mako_project/app/api/{}.py'.format(settings.APP_PATH, model_param.file_name))
-    return FileResponse(file_path)
+        logger.debug(api_param.model_dump(exclude_unset=False))
+        f.write(json.dumps(jsonable_encoder(api_param), ensure_ascii=False))
+    render_py('{}/mako_scripts/api.mako'.format(settings.APP_PATH), json_path, api_py_dir)
+    return api_param

@@ -15,6 +15,9 @@ class BaseParam(BaseModel):
     email: str = Field(
         title="邮箱"
     )
+    project_name: str = Field(
+        title="项目名称"
+    )
     model_name: str = Field(
         title="模块名称"
     )
