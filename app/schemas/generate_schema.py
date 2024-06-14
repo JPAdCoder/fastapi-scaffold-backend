@@ -31,7 +31,8 @@ class MetaClassParam(BaseModel):
 
 
 class AttrParam(BaseModel):
-    attr_name: Optional[str] = Field(
+    attr_name: str | None = Field(
+        None,
         title="属性名称",
         description="可选存在时生成内容为attr_name=attr_value, 不存在时是attr_value"
     )
@@ -41,9 +42,6 @@ class AttrParam(BaseModel):
 
 
 class FieldParam(BaseModel):
-    optional: bool = Field(
-        title="字段是否可选"
-    )
     field_name: str = Field(
         title="字段名称"
     )
@@ -68,9 +66,13 @@ class SchemaClassParam(BaseModel):
     fields: List[FieldParam] = Field(
         title="字段数组"
     )
-    meta_class: Optional[MetaClassParam] = Field(
+    meta_class: MetaClassParam | None = Field(
         None,
         title="子类"
+    )
+    exist_meta: bool = Field(
+        False,
+        title="是否存在子类"
     )
 
 

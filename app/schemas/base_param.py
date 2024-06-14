@@ -21,7 +21,7 @@ class BaseParam(BaseModel):
     model_name: str = Field(
         title="模块名称"
     )
-    import_pkg_list: List[dict] = Field(
+    merged_import_pkg_list: List[dict] = Field(
         title="导入包列表"
     )
     file_name: str = Field(

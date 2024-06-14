@@ -4,7 +4,7 @@ Author ${author}
 Email ${email}
 """
 
-% for v in import_pkg_list:
+% for v in merged_import_pkg_list:
 % if v["from"]:
 from ${v["from"]} import ${v["import"]}
 % else:

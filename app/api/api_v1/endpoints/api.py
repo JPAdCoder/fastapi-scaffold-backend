@@ -33,7 +33,9 @@ async def generate_crud(
     os.makedirs(json_dir, exist_ok=True)
     # 判断生成的api py文件路径是否存在，不存在则创建
     api_py_path = '{}/project/mako_project/app/api/{}.py'.format(settings.APP_PATH, api_param.file_name)
-    api_py_dir = os.path.dirname(api_py_path)
+
+    py_dir = os.path.dirname(api_py_path)
+    os.makedirs(py_dir, exist_ok=True)
     with open(json_path, 'w', encoding='utf-8') as f:
         logger.debug(api_param.model_dump(exclude_unset=False))
         f.write(json.dumps(jsonable_encoder(api_param), ensure_ascii=False))
