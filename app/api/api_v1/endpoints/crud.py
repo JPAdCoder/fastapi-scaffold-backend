@@ -27,13 +27,14 @@ async def generate_crud(
         crud_param: schemas.generate_crud.FormParam,
         db: Session = Depends(deps.get_db)
 ) -> Any:
-    json_path = '{}/json/crud/{}.json'.format(settings.STATICS_FILE_DIRECTORY, crud_param.file_name)
+    json_path = '{}/json/{}/crud/{}.json'.format(settings.STATICS_FILE_DIRECTORY, crud_param.project_name,
+                                                 crud_param.file_name)
     # 判断对应的json路径是否存在，不存在则创建
     json_dir = os.path.dirname(json_path)
     os.makedirs(json_dir, exist_ok=True)
     # 判断生成的crud py文件路径是否存在，不存在则创建
     crud_py_path = '{}/project/{}/app/crud/{}.py'.format(settings.APP_PATH, crud_param.project_name,
-                                                                crud_param.file_name)
+                                                         crud_param.file_name)
     py_dir = os.path.dirname(crud_py_path)
     os.makedirs(py_dir, exist_ok=True)
     with open(json_path, 'w', encoding='utf-8') as f:

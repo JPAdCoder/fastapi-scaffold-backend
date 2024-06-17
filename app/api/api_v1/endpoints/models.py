@@ -27,7 +27,8 @@ async def generate_model(
         model_param: schemas.generate_model.FormParam,
         db: Session = Depends(deps.get_db)
 ) -> Any:
-    json_path = '{}/json/models/{}.json'.format(settings.STATICS_FILE_DIRECTORY, model_param.file_name)
+    json_path = '{}/json/{}/models/{}.json'.format(settings.STATICS_FILE_DIRECTORY, model_param.project_name,
+                                                   model_param.file_name)
     # 判断对应的json路径是否存在，不存在则创建
     json_dir = os.path.dirname(json_path)
     os.makedirs(json_dir, exist_ok=True)

@@ -27,7 +27,8 @@ async def generate_crud(
         api_param: schemas.generate_api.FormParam,
         db: Session = Depends(deps.get_db)
 ) -> Any:
-    json_path = '{}/json/api/{}.json'.format(settings.STATICS_FILE_DIRECTORY, api_param.file_name)
+    json_path = '{}/json/{}/api/{}.json'.format(settings.STATICS_FILE_DIRECTORY, api_param.project_name,
+                                                api_param.file_name)
     # 判断对应的json路径是否存在，不存在则创建
     json_dir = os.path.dirname(json_path)
     os.makedirs(json_dir, exist_ok=True)
