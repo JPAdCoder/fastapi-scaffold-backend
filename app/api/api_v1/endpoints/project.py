@@ -26,12 +26,12 @@ async def generate_project(
         project_param: schemas.generate_project.FormParam,
         db: Session = Depends(deps.get_db)
 ) -> Any:
-    json_path = '{}/json/project/{}.json'.format(settings.STATICS_FILE_DIRECTORY, project_param.file_name)
+    json_path = '{}/json/{}/{}.json'.format(settings.STATICS_FILE_DIRECTORY, project_param.name,
+                                            project_param.core_file_param.core_file_name)
     # 判断对应的json路径是否存在，不存在则创建
     json_dir = os.path.dirname(json_path)
     os.makedirs(json_dir, exist_ok=True)
-    # TODO 生成 /core
-    generate_core()
+    generate_core(project_param.name, project_param)
     # TODO 生成 /db
     generate_db()
     # TODO 生成 /crud
@@ -55,13 +55,22 @@ async def generate_project(
     return jsonable_encoder({"msg": "success"})
 
 
-def generate_core():
-    generate_core_config_py()
-    pass
+def generate_core(core_param: schemas.generate_project.FormParam):
+    core_dir = '{}/project/{}/app/core'.format(settings.APP_PATH, core_param.name)
+    os.makedirs(core_dir, exist_ok=True)
+    # 生成/core/config.py文件
+    generate_core_config_py(core_dir, core_param)
 
 
-def generate_core_config_py():
-    pass
+def generate_core_config_py(core_dir: str, core_param: schemas.generate_project.FormParam):
+    json_path = '{}/json/{}/core/{}.json'.format(settings.STATICS_FILE_DIRECTORY, core_param.name,
+                                                 core_param.core_file_param.core_file_name)
+    json_dir = os.path.dirname(json_path)
+    os.makedirs(json_dir, exist_ok=True)
+    core_py_path = '{}/{}.py'.format(core_dir, core_param.core_file_param.core_file_name)
+    with open(json_path, 'w', encoding='utf-8') as f:
+        f.write(json.dumps(jsonable_encoder(core_param), ensure_ascii=False))
+    render_py('{}/mako_scripts/core.mako'.format(settings.APP_PATH), json_path, core_py_path)
 
 
 def generate_db():
