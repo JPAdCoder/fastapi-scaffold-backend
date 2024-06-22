@@ -10,6 +10,7 @@ from app.schemas import generate_project
 from app.schemas import generate_crud
 from app.schemas import generate_schema
 from app.schemas import generate_api
+from app.schemas import file_param
 from app.schemas.token import Token, TokenPayload
 from app.schemas.user import *
 from app.schemas.auth import *

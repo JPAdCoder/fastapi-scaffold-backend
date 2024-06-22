@@ -1,13 +1,13 @@
 # coding=utf8
 """
 Project :   generate-fastapi-be
-Time:       2024/6/16 15:55
+Time:       2024/6/22 14:54
 Author:     AdCoder
 Email:      17647309108@163com
 """
-from typing import List
+from app.schemas.file_param import FileBaseParam
 from pydantic import BaseModel, Field
-
+from typing import List
 import secrets
 
 
@@ -110,13 +110,13 @@ class GeneralConfig(BaseModel):
     )
 
 
-class CoreFileParam(BaseModel):
-    core_file_name: str = Field(
-        "config",
-        title="core文件名"
-    )
-    merged_import_pkg_list: List[dict] = Field(
-        title="导入包列表"
+class ConfigFileParam(FileBaseParam):
+    pass
+
+
+class CoreParam(BaseModel):
+    config_file_param: ConfigFileParam = Field(
+        title="core模块"
     )
     api_config: APIConfig = Field(
         title="API相关配置"
@@ -129,127 +129,4 @@ class CoreFileParam(BaseModel):
     )
     general_config: GeneralConfig = Field(
         title="通用配置"
-    )
-
-
-class DBInitFileParam(BaseModel):
-    author: str = Field(
-        "AdCoder"
-    )
-    email: str = Field(
-        "17647309108@163.com"
-    )
-    merged_import_pkg_list: List[dict] = Field(
-        title="导入包列表"
-    )
-
-
-class DBBaseFileParam(BaseModel):
-    author: str = Field(
-        "AdCoder"
-    )
-    email: str = Field(
-        "17647309108@163.com"
-    )
-    merged_import_pkg_list: List[dict] = Field(
-        title="导入包列表"
-    )
-
-
-class DBBaseClassFileParam(BaseModel):
-    author: str = Field(
-        "AdCoder"
-    )
-    email: str = Field(
-        "17647309108@163.com"
-    )
-    merged_import_pkg_list: List[dict] = Field(
-        title="导入包列表"
-    )
-
-
-class EngineParam(BaseModel):
-    pool_pre_ping: str = Field(
-        "True",
-        title="pool_pre_ping"
-    )
-    pool_recycle: int = Field(
-        3600,
-        title="pool_recycle"
-    )
-    pool_size: int = Field(
-        10,
-        title="pool_size"
-    )
-
-
-class SessionLocal(BaseModel):
-    autocommit: str = Field(
-        "False",
-        title="自动commit"
-    )
-    autoflush: str = Field(
-        "False",
-        title="自动刷新"
-    )
-    expire_on_commit: str = Field(
-        "True",
-        title="超时自动提交"
-    )
-
-
-class DBSessionFileParam(BaseModel):
-    author: str = Field(
-        "AdCoder"
-    )
-    email: str = Field(
-        "17647309108@163.com"
-    )
-    merged_import_pkg_list: List[dict] = Field(
-        title="导入包列表"
-    )
-    engine: EngineParam = Field(
-        title="engine对象"
-    )
-    session_local: SessionLocal = Field(
-        title="session_local对象"
-    )
-
-
-class DBParam(BaseModel):
-    init_file_param: DBInitFileParam = Field(
-        title="DB模块init文件参数"
-    )
-    base_file_param: DBBaseFileParam = Field(
-        title="DB模块base文件参数"
-    )
-    base_class_file_param: DBBaseClassFileParam = Field(
-        title="DB模块base_class文件参数"
-    )
-    session_file_param: DBSessionFileParam = Field(
-        title="DB模块session文件参数"
-    )
-
-
-class ProjectParam(BaseModel):
-    name: str = Field(
-        "Generate",
-        title="项目名称"
-    )
-    author: str = Field(
-        "AdCoder",
-        title="作者"
-    )
-    email: str = Field(
-        "17647309108@163.com",
-        title="邮箱"
-    )
-
-
-class FormParam(ProjectParam):
-    core_param: CoreFileParam = Field(
-        title="core文件配置参数"
-    )
-    db_param: DBParam = Field(
-        title="db模块配置参数"
     )
