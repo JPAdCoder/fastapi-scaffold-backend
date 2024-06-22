@@ -17,6 +17,9 @@ class ProjectParam(FileBaseParam):
 
 
 class FormParam(ProjectParam):
+    name: str = Field(
+        title="项目名称"
+    )
     core_param: CoreParam = Field(
         title="core文件配置参数"
     )

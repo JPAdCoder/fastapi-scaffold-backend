@@ -17,5 +17,6 @@ class FileBaseParam(BaseModel):
         "17647309108@163.com"
     )
     merged_import_pkg_list: List[dict] = Field(
+        [],
         title="导入包列表"
     )

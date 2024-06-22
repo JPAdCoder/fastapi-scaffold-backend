@@ -12,11 +12,13 @@ from fastapi import APIRouter, Depends
 from fastapi.encoders import jsonable_encoder
 from sqlalchemy.orm import Session
 
+from loguru import logger
 from app.api import deps
 from app.core.config import settings
 from app.generate import render_py
 from app.schemas.generate_project.project import FormParam
 from app.schemas.generate_project.db import DBInitFileParam, DBBaseFileParam, DBBaseClassFileParam, DBSessionFileParam
+from app.schemas.generate_project.crud import CRUDInitFileParam
 
 router = APIRouter()
 
@@ -26,8 +28,7 @@ async def generate_project(
         project_param: FormParam,
         db: Session = Depends(deps.get_db)
 ) -> Any:
-    json_path = '{}/json/{}/{}.json'.format(settings.STATICS_FILE_DIRECTORY, project_param.name,
-                                            project_param.core_param.core_file_name)
+    json_path = '{}/json/{}/config.json'.format(settings.STATICS_FILE_DIRECTORY, project_param.name, )
     # 判断对应的json路径是否存在，不存在则创建
     json_dir = os.path.dirname(json_path)
     os.makedirs(json_dir, exist_ok=True)
@@ -35,7 +36,7 @@ async def generate_project(
     # 生成 /db
     generate_db(project_param)
     # TODO 生成 /crud
-    generate_crud()
+    # generate_crud()
     # TODO 生成 /models
     generate_models()
     # TODO 生成 /schemas
@@ -59,18 +60,17 @@ def generate_core(core_param: FormParam):
     core_dir = '{}/project/{}/app/core'.format(settings.APP_PATH, core_param.name)
     os.makedirs(core_dir, exist_ok=True)
     # 生成/core/config.py文件
-    generate_core_config_py(core_dir, core_param)
+    generate_file(core_dir, core_param.name, 'config.py', 'core/config.mako', core_param)
 
 
 def generate_core_config_py(core_dir: str, core_param: FormParam):
-    json_path = '{}/json/{}/core/{}.json'.format(settings.STATICS_FILE_DIRECTORY, core_param.name,
-                                                 core_param.core_param.core_file_name)
+    json_path = '{}/json/{}/core/config.json'.format(settings.STATICS_FILE_DIRECTORY, core_param.name)
     json_dir = os.path.dirname(json_path)
     os.makedirs(json_dir, exist_ok=True)
-    core_py_path = '{}/{}.py'.format(core_dir, core_param.core_param.core_file_name)
+    core_py_path = '{}/config.py'.format(core_dir)
     with open(json_path, 'w', encoding='utf-8') as f:
         f.write(json.dumps(jsonable_encoder(core_param), ensure_ascii=False))
-    render_py('{}/mako_scripts/core.mako'.format(settings.APP_PATH), json_path, core_py_path)
+    render_py('{}/mako_scripts/core/config.mako'.format(settings.APP_PATH), json_path, core_py_path)
 
 
 def generate_db(project_param: FormParam):
@@ -85,55 +85,25 @@ def generate_db(project_param: FormParam):
     project_param.db_param.session_file_param.author = project_param.author
     project_param.db_param.session_file_param.email = project_param.email
     # 生成__init__.py
-    generate_db_init_py(db_dir, project_param.name, project_param.db_param.init_file_param)
+    generate_file(db_dir, project_param.name, '__init__.py', 'db/__init__.mako', project_param.db_param.init_file_param)
     # 生成base.py
-    generate_db_base_py(db_dir, project_param.name, project_param.db_param.base_file_param)
+    generate_file(db_dir, project_param.name, 'base.py', 'db/base.mako', project_param.db_param.base_file_param)
     # 生成base_class.py
-    generate_db_base_class_py(db_dir, project_param.name, project_param.db_param.base_class_file_param)
+    generate_file(db_dir, project_param.name, 'base_class.py', 'db/base_class.mako',
+                  project_param.db_param.base_file_param)
     # 生成session.py
-    generate_db_session_py(db_dir, project_param.name, project_param.db_param.session_file_param)
+    generate_file(db_dir, project_param.name, 'session.py', 'db/session.mako',
+                  project_param.db_param.session_file_param)
 
 
-def generate_db_init_py(db_dir: str, project_name: str, init_param: DBInitFileParam):
-    json_path = '{}/json/{}/db/__init__.json'.format(settings.STATICS_FILE_DIRECTORY, project_name)
+def generate_file(module_dir: str, project_name: str, file_name: str, mako_path: str, param):
+    json_path = '{}/json/{}/db/{}.json'.format(settings.STATICS_FILE_DIRECTORY, project_name, file_name)
     json_dir = os.path.dirname(json_path)
     os.makedirs(json_dir, exist_ok=True)
-    db_init_py_path = '{}/__init__.py'.format(db_dir)
+    py_path = '{}/{}'.format(module_dir, file_name)
     with open(json_path, 'w', encoding='utf-8') as f:
-        f.write(json.dumps(jsonable_encoder(init_param), ensure_ascii=False))
-    render_py('{}/mako_scripts/db/__init__.mako'.format(settings.APP_PATH), json_path, db_init_py_path)
-
-
-def generate_db_base_py(db_dir: str, project_name: str, base_param: DBBaseFileParam):
-    json_path = '{}/json/{}/db/base.json'.format(settings.STATICS_FILE_DIRECTORY, project_name)
-    json_dir = os.path.dirname(json_path)
-    os.makedirs(json_dir, exist_ok=True)
-    db_base_py_path = '{}/base.py'.format(db_dir)
-    with open(json_path, 'w', encoding='utf-8') as f:
-        f.write(json.dumps(jsonable_encoder(base_param), ensure_ascii=False))
-    render_py('{}/mako_scripts/db/base.mako'.format(settings.APP_PATH), json_path, db_base_py_path)
-
-
-def generate_db_base_class_py(db_dir: str, project_name: str,
-                              base_class_param: DBBaseClassFileParam):
-    json_path = '{}/json/{}/db/base_class.json'.format(settings.STATICS_FILE_DIRECTORY, project_name)
-    json_dir = os.path.dirname(json_path)
-    os.makedirs(json_dir, exist_ok=True)
-    db_base_class_py_path = '{}/base_class.py'.format(db_dir)
-    with open(json_path, 'w', encoding='utf-8') as f:
-        f.write(json.dumps(jsonable_encoder(base_class_param), ensure_ascii=False))
-    render_py('{}/mako_scripts/db/base_class.mako'.format(settings.APP_PATH), json_path, db_base_class_py_path)
-
-
-def generate_db_session_py(db_dir: str, project_name: str,
-                           session_param: DBSessionFileParam):
-    json_path = '{}/json/{}/db/session.json'.format(settings.STATICS_FILE_DIRECTORY, project_name)
-    json_dir = os.path.dirname(json_path)
-    os.makedirs(json_dir, exist_ok=True)
-    db_session_py_path = '{}/session.py'.format(db_dir)
-    with open(json_path, 'w', encoding='utf-8') as f:
-        f.write(json.dumps(jsonable_encoder(session_param), ensure_ascii=False))
-    render_py('{}/mako_scripts/db/session.mako'.format(settings.APP_PATH), json_path, db_session_py_path)
+        f.write(json.dumps(jsonable_encoder(param), ensure_ascii=False))
+    render_py('{}/mako_scripts/{}'.format(settings.APP_PATH, mako_path), json_path, py_path)
 
 
 def generate_crud(project_param: FormParam):
@@ -145,10 +115,6 @@ def generate_crud(project_param: FormParam):
     # 生成crud_role.py
     # 生成crud_role_auth_rels.py
     # 生成crud_user.py
-    pass
-
-
-def generate_crud_init_py(crud_dir: str, project_name: str):
     pass
 
 
