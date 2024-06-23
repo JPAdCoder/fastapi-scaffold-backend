@@ -6,6 +6,7 @@ Email:  17647309108@163.com
 """
 
 from fastapi import FastAPI
+from fastapi.encoders import jsonable_encoder
 from app.api.api_v1.api import api_router
 from app.db.session import SessionLocal
 from starlette.middleware.cors import CORSMiddleware
@@ -16,6 +17,7 @@ from app.models.role_auth_rels import RoleAuthRels
 from app.crud import crud_auth, crud_role_auth_rels
 from uuid import uuid1
 import uvicorn
+from app.generate.mako_render import get_generate_json_params
 
 app = FastAPI(
     title=settings.PROJECT_NAME,
@@ -61,7 +63,7 @@ def update_api_path_to_auth():
             logger.debug(v.__dict__['path'])
             logger.debug(v.__dict__['summary'])
     db.close()
-
+import json
 
 if __name__ == '__main__':
     update_api_path_to_auth()
