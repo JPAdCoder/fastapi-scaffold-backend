@@ -11,6 +11,7 @@ from app.schemas.generate_project.crud import CRUDParam
 from app.schemas.generate_project.core import CoreParam
 from app.schemas.generate_project.models import ModelsParam
 from app.schemas.generate_project.schemas import SchemasParam
+from app.schemas.generate_project.api import ApiParam
 from app.schemas.generate_project.utils import UtilsParam
 from app.schemas.generate_project.drone_yml import DroneYmlFileParam
 from app.schemas.generate_project.gitignore import GitIgnoreFileParam
@@ -37,6 +38,9 @@ class FormParam(FileBaseParam):
     )
     schemas_param: SchemasParam = Field(
         title="schemas模块配置参数"
+    )
+    api_param: ApiParam = Field(
+        title="api模块配置参数"
     )
     utils_param: UtilsParam = Field(
         title="utils模块配置参数"

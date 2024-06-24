@@ -4,8 +4,8 @@ Author ${author}
 Email ${email}
 """
 
-% for v in merged_import_pkg_list:
-% if v["from"]:
+% for v in api_param["deps_file_param"]["merged_import_pkg_list"]:
+% if v["from"] != "null":
 from ${v["from"]} import ${v["import"]}
 % else:
 import ${v["import"]}

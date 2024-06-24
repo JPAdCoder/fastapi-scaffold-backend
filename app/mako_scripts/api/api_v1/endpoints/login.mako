@@ -4,14 +4,13 @@ Author ${author}
 Email ${email}
 """
 
-% for v in merged_import_pkg_list:
-% if v["from"]:
+% for v in api_param["api_v1_endpoints_login_file_param"]["merged_import_pkg_list"]:
+% if v["from"] != "null":
 from ${v["from"]} import ${v["import"]}
 % else:
 import ${v["import"]}
 % endif
 % endfor
-
 
 @router.post("/login/access-token", response_model=schemas.Token, summary="获取用户access_token")
 async def login_access_token(

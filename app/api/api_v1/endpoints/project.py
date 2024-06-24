@@ -140,19 +140,19 @@ def generate_models(project_param: FormParam):
     os.makedirs(models_dir, exist_ok=True)
     # 生成__init__.py
     generate_file(models_dir, project_param.name, 'models', '__init__.py',
-                  '__init__.mako', project_param)
+                  '__init__.mako', project_param.models_param.init_file_param)
     # 生成auth.py
     generate_file(models_dir, project_param.name, 'models', 'auth.py',
-                  'auth.mako', project_param)
+                  'auth.mako', project_param.models_param.auth_file_param)
     # 生成role.py
     generate_file(models_dir, project_param.name, 'models', 'role.py',
-                  'role.mako', project_param)
+                  'role.mako', project_param.models_param.role_file_param)
     # 生成user.py
     generate_file(models_dir, project_param.name, 'models', 'user.py',
-                  'user.mako', project_param)
+                  'user.mako', project_param.models_param.user_file_param)
     # 生成role_auth_rels.py
     generate_file(models_dir, project_param.name, 'models', 'role_auth_rels.py',
-                  'role_auth_rels.mako', project_param)
+                  'role_auth_rels.mako', project_param.models_param.role_auth_rels_file_param)
 
 
 def generate_schemas(project_param: FormParam):
@@ -160,22 +160,22 @@ def generate_schemas(project_param: FormParam):
     os.makedirs(schemas_dir, exist_ok=True)
     # 生成__init__.py
     generate_file(schemas_dir, project_param.name, 'schemas', '__init__.py',
-                  '__init__.mako', project_param)
+                  '__init__.mako', project_param.schemas_param.init_file_param)
     # 生成token.py
     generate_file(schemas_dir, project_param.name, 'schemas', 'token.py',
-                  'token.mako', project_param)
+                  'token.mako', project_param.schemas_param.token_file_param)
     # 生成auth.py
     generate_file(schemas_dir, project_param.name, 'schemas', 'auth.py',
-                  'auth.mako', project_param)
+                  'auth.mako', project_param.schemas_param.auth_file_param)
     # 生成role.py
     generate_file(schemas_dir, project_param.name, 'schemas', 'role.py',
-                  'role.mako', project_param)
+                  'role.mako', project_param.schemas_param.role_file_param)
     # 生成user.py
     generate_file(schemas_dir, project_param.name, 'schemas', 'user.py',
-                  'user.mako', project_param)
+                  'user.mako', project_param.schemas_param.user_file_param)
     # 生成role_auth_rels.py
     generate_file(schemas_dir, project_param.name, 'schemas', 'role_auth_rels.py',
-                  'role_auth_rels.mako', project_param)
+                  'role_auth_rels.mako', project_param.schemas_param.role_auth_rels_file_param)
 
 
 def generate_api(project_param: FormParam):
@@ -183,22 +183,22 @@ def generate_api(project_param: FormParam):
     os.makedirs(api_dir, exist_ok=True)
     # 生成deps.py文件
     generate_file(api_dir, project_param.name, 'api', 'deps.py',
-                  'deps.mako', project_param)
+                  'deps.mako', project_param.api_param.deps_file_param)
     # 生成api_v1/api.py文件
     generate_file(api_dir, project_param.name, 'api/api_v1', 'api.py',
-                  'api.mako', project_param)
+                  'api.mako', project_param.api_param.api_v1_api_file_param)
     # 生成api_v1/endpoints/user.py文件
     generate_file(api_dir, project_param.name, 'api/api_v1/endpoints', 'user.py',
-                  'user.mako', project_param)
+                  'user.mako', project_param.api_param.api_v1_endpoints_user_file_param)
     # 生成api_v1/endpoints/role.py文件
     generate_file(api_dir, project_param.name, 'api/api_v1/endpoints', 'role.py',
-                  'role.mako', project_param)
+                  'role.mako', project_param.api_param.api_v1_endpoints_role_file_param)
     # 生成api_v1/endpoints/auth.py文件
     generate_file(api_dir, project_param.name, 'api/api_v1/endpoints', 'auth.py',
-                  'auth.mako', project_param)
+                  'auth.mako', project_param.api_param.api_v1_endpoints_auth_file_param)
     # 生成api_v1/endpoints/login.py文件
     generate_file(api_dir, project_param.name, 'api/api_v1/endpoints', 'login.py',
-                  'login.mako', project_param)
+                  'login.mako', project_param.api_param.api_v1_endpoints_login_file_param)
 
 
 def generate_tests(project_param: FormParam):
@@ -211,7 +211,7 @@ def generate_utils(project_param: FormParam):
     os.makedirs(utils_dir, exist_ok=True)
     # 生成security.py
     generate_file(utils_dir, project_param.name, 'utils', 'security.py',
-                  'security.mako', project_param)
+                  'security.mako', project_param.utils_param.security_file_param)
 
 
 def generate_drone_yml(project_param: FormParam):
@@ -219,7 +219,7 @@ def generate_drone_yml(project_param: FormParam):
     os.makedirs(drone_yml_dir, exist_ok=True)
     # 生成.drone.yml
     generate_file(drone_yml_dir, project_param.name, '', '.drone.yml',
-                  '.drone.yml.mako', project_param)
+                  '.drone.yml.mako', project_param.drone_yml_file_param)
 
 
 def generate_gitignore(project_param: FormParam):
@@ -227,7 +227,7 @@ def generate_gitignore(project_param: FormParam):
     os.makedirs(gitignore_dir, exist_ok=True)
     # 生成.gitignore
     generate_file(gitignore_dir, project_param.name, '', '.gitignore',
-                  '.gitignore.mako', project_param)
+                  '.gitignore.mako', project_param.gitignore_file_param)
 
 
 def generate_dockerfile(project_param: FormParam):
@@ -235,7 +235,7 @@ def generate_dockerfile(project_param: FormParam):
     os.makedirs(dockerfile_dir, exist_ok=True)
     # 生成dockerfile
     generate_file(dockerfile_dir, project_param.name, '', 'Dockerfile',
-                  'Dockerfile.mako', project_param)
+                  'Dockerfile.mako', project_param.dockerfile_file_param)
 
 
 def generate_version_txt(project_param: FormParam):
@@ -243,4 +243,4 @@ def generate_version_txt(project_param: FormParam):
     os.makedirs(version_txt_dir, exist_ok=True)
     # 生成version.txt
     generate_file(version_txt_dir, project_param.name, '', 'version.txt',
-                  'version.txt.mako', project_param)
+                  'version.txt.mako', project_param.version_txt_file_param)
