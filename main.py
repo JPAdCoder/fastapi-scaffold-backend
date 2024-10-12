@@ -66,5 +66,6 @@ def update_api_path_to_auth():
 import json
 
 if __name__ == '__main__':
+    # 添加启动注释
     update_api_path_to_auth()
     uvicorn.run(app='main:app', host=settings.SERVER_HOST, port=settings.SERVER_PORT, reload=True)

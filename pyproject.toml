@@ -16,6 +16,10 @@ mako = "^1.3.3"
 alembic = "^1.13.1"
 passlib = "^1.7.4"
 bcrypt = "4.0.1"
+requests = "^2.32.3"
+pysrt = "^1.1.2"
+tencentcloud-sdk-python = "^3.0.1181"
+moviepy = "^1.0.3"
 
 
 [[tool.poetry.source]]

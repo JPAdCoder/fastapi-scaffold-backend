@@ -2,3 +2,4 @@
 .idea
 app/core/config.py
 app/project
+.DS_Store
