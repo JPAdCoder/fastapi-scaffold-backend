@@ -12,6 +12,10 @@ from app.db.session import SessionLocal
 from fastapi.encoders import jsonable_encoder
 import os
 from dotenv import load_dotenv
+import pytest
+from sqlalchemy.orm import Session
+from uuid import uuid1
+from app.core.config import settings
 
 # 加载环境变量
 load_dotenv()
@@ -22,86 +26,106 @@ TEST_USER_PASSWORD = os.getenv("TEST_USER_PASSWORD", "test_password")
 TEST_ROLE_ID = os.getenv("TEST_ROLE_ID", "test_role_id")
 TEST_DIVISION_ID = os.getenv("TEST_DIVISION_ID", "test_division_id")
 
+pytestmark = [pytest.mark.unit, pytest.mark.db]
 
-def test_get_users_search_count():
-    db = SessionLocal()
-    user_db = crud_user.get_users_search_count(db=db, name_like="")
-    db.close()
-    logger.debug(user_db)
-
-
-def test_get_users_search():
-    db = SessionLocal()
-    user_db = crud_user.get_users_search(db=db)
-    db.close()
-    logger.debug(user_db)
-
-
-def test_get_all():
-    db = SessionLocal()
-    user_db = crud_user.get_all(db=db)
-    db.close()
-    logger.debug(jsonable_encoder(user_db))
-
-
-def test_create(user_name: str = TEST_USER_NAME,
-                password: str = TEST_USER_PASSWORD,
-                role_id: str = TEST_ROLE_ID,
-                division_id: str = TEST_DIVISION_ID):
+def test_get_users_search_count(db: Session):
     """
-    测试crud_user中的添加用户方法
+    测试获取搜索用户总数
     """
-    db = SessionLocal()
-    user_in = crud_user.get_by_name(db, name=user_name)
-    if user_in:
-        raise ValueError("用户已存在")
-    user_db = crud_user.create(db, obj_in=UserCreate(
-        name=user_name,
-        password=password,
-        role_id=role_id
-    ))
-    db.close()
-    logger.debug(jsonable_encoder(user_db))
+    count = crud_user.get_users_search_count(db=db, name_like="")
+    logger.debug(f"\n count={count}")
 
 
-def test_update(user_id: str = "33fac4520c7211efa1868e7602803e81",
-                user_name: str = "",
-                division_id: str = "",
-                password: str = "",
-                role_id: str = ""):
+def test_get_users_search(db: Session):
     """
-    测试crud_user中更新用户的方法
+    测试搜索用户
     """
-    db = SessionLocal()
-    db_user = crud_user.get(db, model_id=user_id)
-    if not db_user:
-        raise ValueError(
-            detail="用户不存在"
-        )
-    db_user = crud_user.update(db, db_obj=db_user, obj_in=UserUpdate(
-        role_id="a95318200c6411efb2be8e7602803e81"
-    ))
-    db.close()
-    logger.debug(jsonable_encoder(db_user))
+    data = crud_user.get_users_search(db=db, skip=0, limit=10, name_like="")
+    logger.debug(f"\n data={data}")
 
 
-def test_remove(user_id: str = "33fac4520c7211efa1868e7602803e81"):
+def test_get_all(db: Session):
     """
-    测试crud_user中的删除用户方法
+    测试获取所有用户
     """
-    db = SessionLocal()
-    db_user = crud_user.get(db, model_id=user_id)
-    if not db_user:
-        raise ValueError(
-            detail="用户不存在"
-        )
-    db_usr = crud_user.remove(db, model_id=user_id)
-    db.close()
-    logger.debug(jsonable_encoder(db_user))
+    data = crud_user.get_all(db=db)
+    logger.debug(f"\n {data}")
+
+
+def test_create_user(db: Session):
+    """
+    测试创建用户
+    """
+    user_in = UserCreate(
+        name=f"test.create.user.{uuid1().hex}",
+        password="test-password",
+        role_id=uuid1().hex,
+        division_id=uuid1().hex,
+        is_superuser=False,
+        is_active=True
+    )
+    user_db = crud_user.create(db, obj_in=user_in)
+    assert user_db.name == user_in.name
+    assert user_db.role_id == user_in.role_id
+    assert user_db.division_id == user_in.division_id
+    assert not user_db.is_superuser
+    assert user_db.is_active
+
+def test_get_user_by_id(db: Session, test_user: dict):
+    """
+    测试通过ID获取用户
+    """
+    user_db = crud_user.get(db, model_id=test_user["id"])
+    assert user_db
+    assert user_db.id == test_user["id"]
+    assert user_db.name == test_user["name"]
+
+def test_get_user_by_name(db: Session, test_user: dict):
+    """
+    测试通过用户名获取用户
+    """
+    user_db = crud_user.get_by_name(db, name=test_user["name"])
+    assert user_db
+    assert user_db.id == test_user["id"]
+    assert user_db.name == test_user["name"]
+
+def test_update_user(db: Session, test_user: dict):
+    """
+    测试更新用户信息
+    """
+    new_division_id = uuid1().hex
+    user_update = UserUpdate(division_id=new_division_id)
+    # 首先获取用户对象
+    user_obj = crud_user.get(db, model_id=test_user["id"])
+    assert user_obj, f"用户 {test_user['id']} 不存在"
+    user_db = crud_user.update(db, db_obj=user_obj, obj_in=user_update)
+    assert user_db.division_id == new_division_id
+
+def test_authenticate_user(db: Session, test_user: dict):
+    """
+    测试用户认证
+    """
+    authenticated_user = crud_user.authenticate(
+        db, 
+        name=test_user["name"], 
+        password=settings.TEST_USER_PASSWORD
+    )
+    assert authenticated_user
+    assert authenticated_user.id == test_user["id"]
+
+def test_not_authenticate_user(db: Session):
+    """
+    测试错误的用户认证
+    """
+    authenticated_user = crud_user.authenticate(
+        db, 
+        name="wrong-user", 
+        password="wrong-password"
+    )
+    assert not authenticated_user
 
 
 if __name__ == '__main__':
-    test_create()
-    # test_get_all()
-    # test_update()
-    # test_remove()
+    db = SessionLocal()
+    test_create_user(db)
+    db.close()

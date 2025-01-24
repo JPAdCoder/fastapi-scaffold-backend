@@ -24,7 +24,7 @@ router = APIRouter()
 
 @router.post("/model/generate", summary="生成model文件")
 async def generate_model(
-        model_param: schemas.generate_model.FormParam,
+        model_param: schemas.ModelFormParam,
         db: Session = Depends(deps.get_db)
 ) -> Any:
     json_path = '{}/json/{}/models/{}.json'.format(settings.STATICS_FILE_DIRECTORY, model_param.project_name,

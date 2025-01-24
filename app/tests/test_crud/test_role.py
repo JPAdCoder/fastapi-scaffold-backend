@@ -68,7 +68,7 @@ def test_create(role_name: str = "admin"):
     db = SessionLocal()
     role_in = crud_role.get_by_name(db, role_name)
     if role_in:
-        raise ValueError("角色已存在")
+        raise ValueError(f"角色 {role_name} 已存在")
     role_db = crud_role.create(db, obj_in=RoleCreate(
         name=role_name
     ))

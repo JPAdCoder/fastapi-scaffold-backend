@@ -13,11 +13,13 @@ from app.schemas.generate_project.models import ModelsParam
 from app.schemas.generate_project.schemas import SchemasParam
 from app.schemas.generate_project.api import ApiParam
 from app.schemas.generate_project.utils import UtilsParam
-from app.schemas.generate_project.drone_yml import DroneYmlFileParam
-from app.schemas.generate_project.gitignore import GitIgnoreFileParam
-from app.schemas.generate_project.dockerfile import DockerfileFileParam
-from app.schemas.generate_project.version_txt import VersionTxtFileParam
-from app.schemas.file_param import FileBaseParam
+from app.schemas.generate_project.config_files import (
+    DroneYmlFileParam,
+    GitIgnoreFileParam,
+    DockerfileFileParam,
+    VersionTxtFileParam
+)
+from app.schemas.base import FileBaseParam
 
 
 class FormParam(FileBaseParam):
@@ -57,4 +59,3 @@ class FormParam(FileBaseParam):
     version_txt_file_param: VersionTxtFileParam = Field(
         title="version.txt文件配置参数"
     )
-

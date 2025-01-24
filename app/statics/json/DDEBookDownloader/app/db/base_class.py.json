@@ -1,1 +1,0 @@
-{"author": "AdCoder", "email": "17647309108@163.com", "merged_import_pkg_list": [{"from": "app.db.base_class", "import": "Base"}, {"from": "app.models.auth", "import": "Auth"}, {"from": "app.models.role_auth_rels", "import": "RoleAuthRels"}, {"from": "app.models.role", "import": "Role"}, {"from": "app.models.user", "import": "User"}]}

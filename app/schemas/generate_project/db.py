@@ -6,7 +6,7 @@ Author:     AdCoder
 Email:      17647309108@163com
 """
 
-from app.schemas.file_param import FileBaseParam
+from app.schemas.base import FileBaseParam
 from pydantic import BaseModel, Field
 
 

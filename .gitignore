@@ -21,7 +21,6 @@ wheels/
 *.egg
 
 # Virtual Environment
-.env
 .venv
 env/
 venv/
@@ -37,8 +36,11 @@ venv.bak/
 *.swo
 *~
 
-# OS
+# System
 .DS_Store
+.env
+
+# OS
 Thumbs.db
 
 # Project specific

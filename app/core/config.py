@@ -46,6 +46,12 @@ class Settings(BaseSettings):
     MINIO_PORT: int = int(os.getenv("MINIO_PORT", "9000"))
     MINIO_BUCKET: str = os.getenv("MINIO_BUCKET", "fastapi-generate")
 
+    # 测试配置
+    TEST_USER_PASSWORD: str = os.getenv("TEST_USER_PASSWORD", "test-password-123")
+    TEST_USER_NAME: str = os.getenv("TEST_USER_NAME", "test.user")
+    TEST_ROLE_ID: str = os.getenv("TEST_ROLE_ID", "test-role-id")
+    TEST_DIVISION_ID: str = os.getenv("TEST_DIVISION_ID", "test-division-id")
+
     # 静态文件配置
     APP_PATH: ClassVar[str] = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     STATICS_FILE_DIRECTORY: ClassVar[str] = os.path.join(APP_PATH, "statics")

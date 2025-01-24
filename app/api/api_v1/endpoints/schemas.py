@@ -24,7 +24,7 @@ router = APIRouter()
 
 @router.post("/schema/generate", summary="生成schema文件")
 async def generate_schema(
-        schema_param: schemas.generate_schema.FormParam,
+        schema_param: schemas.SchemaFormParam,
         db: Session = Depends(deps.get_db)
 ) -> Any:
     json_path = '{}/json/{}/schemas/{}.json'.format(settings.STATICS_FILE_DIRECTORY, schema_param.project_name,

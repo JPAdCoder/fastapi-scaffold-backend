@@ -24,7 +24,7 @@ router = APIRouter()
 
 @router.post("/api/generate", summary="生成api文件")
 async def generate_crud(
-        api_param: schemas.generate_api.FormParam,
+        api_param: schemas.ApiFormParam,
         db: Session = Depends(deps.get_db)
 ) -> Any:
     json_path = '{}/json/{}/api/{}.json'.format(settings.STATICS_FILE_DIRECTORY, api_param.project_name,
