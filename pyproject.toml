@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "generate-fastapi-be"
+name = "fastapi-scaffold-backend"
 version = "0.1.0"
 description = "A powerful FastAPI code generator that helps developers quickly scaffold FastAPI projects with best practices"
 authors = ["adcoder <17647309108@163.com>"]
