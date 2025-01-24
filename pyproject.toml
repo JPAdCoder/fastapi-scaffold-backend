@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "generate-fastapi-be"
 version = "0.1.0"
-description = ""
+description = "A powerful FastAPI code generator that helps developers quickly scaffold FastAPI projects with best practices"
 authors = ["adcoder <17647309108@163.com>"]
 readme = "README.md"
 
@@ -17,10 +17,7 @@ alembic = "^1.13.1"
 passlib = "^1.7.4"
 bcrypt = "4.0.1"
 requests = "^2.32.3"
-pysrt = "^1.1.2"
-tencentcloud-sdk-python = "^3.0.1181"
-moviepy = "^1.0.3"
-
+python-dotenv = "^1.0.0"
 
 [[tool.poetry.source]]
 name = "aliyun"
