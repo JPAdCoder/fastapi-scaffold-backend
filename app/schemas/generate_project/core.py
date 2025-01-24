@@ -9,103 +9,101 @@ from app.schemas.file_param import FileBaseParam
 from pydantic import BaseModel, Field
 from typing import List
 import secrets
+from app.core.config import settings
 
 
 class APIConfig(BaseModel):
     api_v1_str: str = Field(
-        "/generate/api/v1",
+        settings.API_V1_STR,
         title="API接口路径"
     )
     openapi_json_url: str = Field(
-        "/generate/api/v1/openapi.json",
+        settings.OPENAPI_JSON_URL,
         title="openapi.json文件路径"
     )
     openapi_doc_url: str = Field(
-        "/generate/api/v1/docs",
+        settings.OPENAPI_DOC_URL,
         title="doc文档路径"
     )
     openapi_redoc_url: str = Field(
-        "/generate/api/v1/redoc",
+        settings.OPENAPI_REDOC_URL,
         title="redoc文档路径"
     )
     server_host: str = Field(
-        "0.0.0.0",
+        settings.SERVER_HOST,
         title="API 服务器host"
     )
     server_port: int = Field(
-        80,
+        settings.SERVER_PORT,
         title="API 服务器端口"
     )
     secret_key: str | None = Field(
-        secrets.token_urlsafe(32),
+        settings.SECRET_KEY,
         title="token加密key"
     )
     project_name: str = Field(
-        "FastAPI通用接口生成接口文档",
+        settings.PROJECT_NAME,
         title="doc文档显示项目名称"
     )
     access_token_expire_minutes: int = Field(
-        60 * 24 * 8,
+        settings.ACCESS_TOKEN_EXPIRE_MINUTES,
         title="token过期时间"
     )
     backend_cors_origins: str = Field(
-        "['*']",
+        str(settings.BACKEND_CORS_ORIGINS),
         title="跨域请求地址白名单"
     )
 
 
 class DatabaseConfig(BaseModel):
     database_host: str = Field(
-        "192.168.31.29",
+        settings.POSTGRES_SERVER,
         title="数据库host"
     )
     database_port: int = Field(
-        54334,
+        settings.POSTGRES_PORT,
         title="数据库端口"
     )
     database_user: str = Field(
-        "postgres",
+        settings.POSTGRES_USER,
         title="数据库用户名"
     )
     database_password: str = Field(
-        "96241158a0",
+        settings.POSTGRES_PASSWORD,
         title="数据库密码"
     )
     database_db: str = Field(
-        "fastapi-generate",
+        settings.POSTGRES_DB,
         title="数据库名称"
     )
     sqlalchemy_database_url: str = Field(
-        "postgresql://{}:{}@{}:{}/{}".format(
-            database_user, database_password, database_host,
-            database_port, database_db
-        ),
+        settings.SQLALCHEMY_DATABASE_URL,
         title="sqlalchemy数据库连接字符串"
     )
 
 
 class MinIOConfig(BaseModel):
     minio_host: str = Field(
-        "192.168.31.29",
+        settings.MINIO_HOST,
         title="minio服务器host"
     )
     minio_port: int = Field(
-        4000,
+        settings.MINIO_PORT,
         title="minio端口"
     )
     minio_bucket: str = Field(
-        "fastapi-generate",
+        settings.MINIO_BUCKET,
         title="minio存储bucket名称"
     )
 
 
 class GeneralConfig(BaseModel):
     app_path: str = Field(
-        "/Users/adcoder/PycharmProjects/generate-fastapi-be/app",
+        settings.APP_PATH,
         title="app根路径"
     )
     statics_file_directory: str = Field(
-        "{}/statics".format(app_path),
+        "{}/statics".format(settings.APP_PATH),
         title="静态资源文件路径"
     )
 

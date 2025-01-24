@@ -8,8 +8,19 @@ Email:  17647309108@163.com
 from loguru import logger
 from app.crud.crud_user import user as crud_user
 from app.schemas.user import UserCreate, UserUpdate
-from app.api.deps import SessionLocal
+from app.db.session import SessionLocal
 from fastapi.encoders import jsonable_encoder
+import os
+from dotenv import load_dotenv
+
+# 加载环境变量
+load_dotenv()
+
+# 从环境变量获取测试配置
+TEST_USER_NAME = os.getenv("TEST_USER_NAME", "test_user")
+TEST_USER_PASSWORD = os.getenv("TEST_USER_PASSWORD", "test_password")
+TEST_ROLE_ID = os.getenv("TEST_ROLE_ID", "test_role_id")
+TEST_DIVISION_ID = os.getenv("TEST_DIVISION_ID", "test_division_id")
 
 
 def test_get_users_search_count():
@@ -33,9 +44,10 @@ def test_get_all():
     logger.debug(jsonable_encoder(user_db))
 
 
-def test_create(user_name: str = "adcoder", password: str = "96241158a0",
-                role_id: str = "a95318200c6411efb2be8e7602803e81",
-                division_id: str = "0"):
+def test_create(user_name: str = TEST_USER_NAME,
+                password: str = TEST_USER_PASSWORD,
+                role_id: str = TEST_ROLE_ID,
+                division_id: str = TEST_DIVISION_ID):
     """
     测试crud_user中的添加用户方法
     """
