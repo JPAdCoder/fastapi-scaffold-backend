@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, Security, Query
 from app import crud, schemas, models
 from sqlalchemy.orm import Session
+from app.db.session import SessionLocal
 from app.api import deps
 from typing import Any
 

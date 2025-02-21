@@ -7,26 +7,27 @@ import os
 # 加载 .env 文件
 load_dotenv()
 
+
 class Settings(BaseSettings):
     # API 配置
     API_V1_STR: str = os.getenv("API_V1_STR", "/generate/api/v1")
-    
+
     # OpenAPI 文档配置
     OPENAPI_JSON_URL: str = os.getenv("OPENAPI_JSON_URL", "/openapi.json")
     OPENAPI_DOC_URL: str = os.getenv("OPENAPI_DOC_URL", "/docs")
     OPENAPI_REDOC_URL: str = os.getenv("OPENAPI_REDOC_URL", "/redoc")
-    
+
     # 服务器配置
     SERVER_HOST: str = os.getenv("SERVER_HOST", "127.0.0.1")
     SERVER_PORT: int = int(os.getenv("SERVER_PORT", "8000"))
-    
+
     # 安全配置
     SECRET_KEY: str = os.getenv("SECRET_KEY", secrets.token_urlsafe(32))
     ACCESS_TOKEN_EXPIRE_MINUTES: int = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", "30"))
-    
+
     # 项目配置
     PROJECT_NAME: str = os.getenv("PROJECT_NAME", "FastAPI Code Generator")
-    
+
     # CORS 配置
     BACKEND_CORS_ORIGINS: List[str] = eval(os.getenv("BACKEND_CORS_ORIGINS", '["http://localhost:3000"]'))
 

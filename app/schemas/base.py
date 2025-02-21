@@ -26,6 +26,14 @@ class BaseParam(BaseModel):
     model_name: str = Field(
         title="模块名称"
     )
+    base_model_name: str = Field(
+        None,
+        title="父类名"
+    )
+    file_name: str = Field(
+        None,
+        title="生成的文件名"
+    )
     model_config = ConfigDict(
         protected_namespaces=()
     )

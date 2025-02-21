@@ -57,12 +57,14 @@ def update_api_path_to_auth():
             crud_role_auth_rels.role_auth_rels.create(db=db, obj_in=RoleAuthRels(
                 id=uuid1().hex,
                 auth_id=auth.id,
-                role_id="93e9071ada2c11efbe0b8e7602803e82",
+                role_id="72f03256da2a11efbb078e7602803e82",
                 is_active=True
             ))
             logger.debug(v.__dict__['path'])
             logger.debug(v.__dict__['summary'])
     db.close()
+
+
 import json
 
 if __name__ == '__main__':

@@ -9,13 +9,17 @@ This module contains parameter classes for various code generators including
 API, CRUD, Model, and Schema generators.
 """
 from pydantic import Field
-from app.schemas.base import BaseParam
+from typing import List
+from app.schemas.base import BaseParam, FileBaseParam
 
 
-class ApiFormParam(BaseParam):
+class ApiFormParam(BaseParam, FileBaseParam):
     """Parameters for API code generation"""
     model_name_lower_case: str = Field(
         title="模块名小写"
+    )
+    model_name_comment: str = Field(
+        title="模块信息说明"
     )
     schema_create_model: str = Field(
         title="添加对象参数类"
@@ -26,9 +30,12 @@ class ApiFormParam(BaseParam):
     schema_rep_model: str = Field(
         title="返回对象参数类"
     )
+    schema_page_rep_model: str = Field(
+        title="返回对象分页参数类"
+    )
 
 
-class CrudFormParam(BaseParam):
+class CrudFormParam(BaseParam, FileBaseParam):
     """Parameters for CRUD code generation"""
     base_crud_class: str = Field(
         title="父级模块名称"
@@ -38,24 +45,21 @@ class CrudFormParam(BaseParam):
     )
 
 
-class ModelFormParam(BaseParam):
+class ModelFormParam(BaseParam, FileBaseParam):
     """Parameters for Model code generation"""
     table_name: str = Field(
         title="数据库表名"
     )
-    field_list: list = Field(
+    table_comment: str = Field(
+        title="数据表描述"
+    )
+    columns: List[dict] = Field(
         title="字段列表"
     )
 
 
-class SchemaFormParam(BaseParam):
+class SchemaFormParam(BaseParam, FileBaseParam):
     """Parameters for Schema code generation"""
-    field_list: list = Field(
+    schema_classes: list = Field(
         title="字段列表"
-    )
-    schema_name: str = Field(
-        title="schema名称"
-    )
-    schema_description: str = Field(
-        title="schema描述"
     )

@@ -10,6 +10,7 @@ from app.crud.crud_user import user
 from app.schemas.user import UserCreate
 from uuid import uuid1
 
+
 def init_db() -> None:
     db = SessionLocal()
     try:
@@ -22,7 +23,7 @@ def init_db() -> None:
             is_superuser=True,
             is_active=True
         )
-        
+
         # 检查是否已存在超级用户
         existing_user = db.query(user.model).filter(user.model.name == "admin").first()
         if not existing_user:
@@ -30,9 +31,10 @@ def init_db() -> None:
             print("Successfully created super admin user")
         else:
             print("Super admin user already exists")
-            
+
     finally:
         db.close()
+
 
 if __name__ == "__main__":
     print("Creating initial super admin user...")

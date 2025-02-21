@@ -33,7 +33,7 @@ async def generate_crud(
     json_dir = os.path.dirname(json_path)
     os.makedirs(json_dir, exist_ok=True)
     # 判断生成的api py文件路径是否存在，不存在则创建
-    api_py_path = '{}/project/{}/app/api/{}.py'.format(settings.APP_PATH, api_param.project_name,
+    api_py_path = '{}/project/{}/app/api/api_v1/endpoints/{}.py'.format(settings.APP_PATH, api_param.project_name,
                                                        api_param.file_name)
 
     py_dir = os.path.dirname(api_py_path)

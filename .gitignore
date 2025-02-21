@@ -61,3 +61,6 @@ dist/
 *.bak
 *.swp
 *.swo.env
+
+# Generate Project
+app/project
